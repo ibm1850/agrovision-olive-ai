@@ -1,0 +1,543 @@
+FILE: C:\Users\Win11\Downloads\pfe v1\Guide-dun-rapport-du-stage (1).pdf
+PAGES: 21
+
+
+========================================
+PAGE 1
+========================================
+	 	 	 	
+ 
+ 
+ 
+ 
+Cette page est personnelle et est consacrée, généralement, à remercier l’encadreur de la 
+société ainsi que les personnes (membres de la société, ensei gnants, personnel technique ou 
+administratif et non pas les membres du jury) qui auraient aidé l ’étudiant à mener à terme son 
+stage de perfectionnement en le conseillant ou en lui fournissant de l a documentation. 
+Ces remerciements sont exprimés en une dizaine de lignes au ma ximum, de la façon la plus 
+simple possible, sans platitude ni exagération . 
+La mise en forme de cette page est au gré de l’étudiant. 
+
+========================================
+PAGE 2
+========================================
+Sommaire 
+  
+[La table des matières (sommaire) permet, grâce à la p agination, de retrouver l’endroit où se 
+trouve un élément recherché par le lecteur. La table des matières doit être générée d’une façon 
+automatique. Elle ne doit pas présenter plus que trois niveaux de sous-t itres.] 
+Introduction générale ................................................... ................................................... .....1 
+Chapitre 1 : Présentation du cadre du stage ................................................... ....................2 
+I. Présentation de la société ......................... ................................................... ................2 
+II. Etude de l’existant ................................. ................................................... ..................2 
+II.1. Description de l’existant......................... ................................................... ..............2 
+II.2. Critique de l’existant ........................... ................................................... .................2 
+II.3. Solution proposée.................................... ................................................... .............2 
+Chapitre 2 : Notions théoriques ................................................... ........................................4 
+Chapitre 3 : Spécification des besoins ................................................... ...............................5 
+I. Besoins fonctionnels ................................. ................................................... ...............5 
+II. Besoins non fonctionnels .............................. ................................................... ...........5 
+III. Diagrammes de cas d’utilisation.................. ................................................... .............5 
+III.1. Présentation des acteurs......................... ................................................... ..............5 
+III.2. Description des cas d’utilisation................. ................................................... .........5 
+Chapitre 4 : Conception ................................................... ................................................... .7 
+I. Conception de la base de données ........................ ................................................... ....7 
+I.1. Conception de la base de données en se basant sur la méthode MERISE...................7 
+II.2. Conception de la base de données en se basant sur le langage UML ........................8 
+II. Conception des traitements ......................... ................................................... .............9 
+Chapitre 5: Réalisation ................................................... ................................................... .10 
+I. Environnement de développement.......................... ................................................... 10 
+I.1. Environnement matériel.............................. ................................................... .........10 
+I.2. Environnement logiciel............................... ................................................... .........10 
+II. Principales interfaces graphiques ..................... ................................................... ......10 
+Conclusion générale ................................................... ................................................... ......11 
+Bibliographie et Nétographie ................................................... ..........................................12 
+    ................................................... ................................................... ......................13 
+ANNEXE A : Que placer en annexes ? ....................................................................... ......14 
+ANNEXE B : Proposition de mise en forme ................. ................................................... .15 
+ANNEXE C : Diverses recommandations.................... ................................................... ..17 
+ 
+
+========================================
+PAGE 3
+========================================
+Liste des figures 
+  
+ 
+[Cette rubrique n’est pas obligatoire si le nombre de figures e st inférieur à cinq (05). Elle doit 
+être générée automatiquement.] 
+Notez que le titre de la figure doit être placé en dessous 
+de la figure. 
+
+========================================
+PAGE 4
+========================================
+Liste des tableaux 
+ 
+ 
+[Cette rubrique n’est pas obligatoire si le nombre de tableaux est inférieur à cinq (05). Elle 
+doit être générée automatiquement.] 
+Notez que le titre du tableau doit être placé au dessus 
+ du tableau. 
+ 
+
+========================================
+PAGE 5
+========================================
+Introduction générale 
+Guide de rédaction du rapport du stage de perfectionnement 1 
+ 
+Introduction générale 
+ 
+ 
+L’introduction générale comporte, globalement, deux parties. 
+La première partie présente le sujet à travers des rensei gnements précis et pose le problème à 
+résoudre avec clarté sans évocation de résultats.  
+[Il faut éviter  impérativement les introductions « passe partout » ] 
+La seconde partie énonce le plan du rapport en évoquant, brièvement , le contenu de chaque 
+chapitre. 
+La suite de ce guide illustre un exemple 
+ type de structure de rapport pouvant être adoptée par 
+un étudiant du département Technologies de l’informatique dont le sta ge a pour objectif de 
+développer une application .  
+ 
+Attention !!   
+La numérotation du rapport commence par l’introduction, c’est la page  numéro 1 . 
+
+========================================
+PAGE 6
+========================================
+Chapitre 1 : Présentation du cadre du stage 
+Guide de rédaction du rapport du stage de perfectionnement 2 
+ 
+Chapitre 1 : Présentation du cadre du stage 
+ 
+ 
+Ce chapitre comprend, généralement, deux parties ; la présenta tion de la société où s’est 
+déroulé le stage et une étude de l’existant sur les modalités de travail actuelles. 
+I. Présentation de la société 
+Cette partie comprend une brève description de la société d’ accueil : son domaine d’activité, 
+un bref historique (si ça apporte une plus-value au travail), s on organisation. Il faudrait, 
+surtout, insister sur l’aspect informatique : ses activité s dans ce domaine ; la présentation de 
+son parc informatique est, particulièrement, appréciée. 
+Il est, également, important d’indiquer le département au sein duquel le stage s’est effectué en 
+précisant sa vocation (développement, maintenance,…) 
+Attention !!  La présentation de la société n’est pas une publicité pour cell e-ci ; il ne s’agit pas 
+de vanter ses mérites ou les services qu’elle offre. 
+II. Etude de l’existant 
+Cette partie comprend, généralement, trois parties. 
+II.1. Description de l’existant 
+Il est question d’expliquer comment le travail s’effectue, actuellement, au sein de la société 
+(en rapport avec l’application qui va être développée par l’étudiant) . 
+II.2. Critique de l’existant 
+Cette partie soulève les points forts et faibles de la solut ion actuelle (en exploitation) en 
+insistant sur les lacunes et les insuffisances de celle-ci. 
+II.3. Solution proposée 
+Deux cas se présentent : soit il y a une application existante qui présente certaines lacunes et, 
+donc, la proposition consiste à apporter des améliorations, soit tout est géré manuellement et il 
+faudrait, donc, informatiser le processus de travail actuel.  Dans les deux situations, il faudrait 
+en quelques lignes présenter la ou les propositions possibles (en indiquant ses avantages et ses 
+inconvénients) et justifier le choix de la solution adoptée. 
+Remarque :  Il est possible que l’étude de l’existant fasse l’objet d’un chapit re indépendant. 
+
+========================================
+PAGE 7
+========================================
+Chapitre 1 : Présentation du cadre du stage 
+Guide de rédaction du rapport du stage de perfectionnement 3 
+Chaque chapitre doit comporter une brève introduction et conclusion. La  mention des termes 
+« Introduction » et « Conclusion » n’est pas indispensable. 
+
+========================================
+PAGE 8
+========================================
+Chapitre 2 : Notions théoriques 
+Guide de rédaction du rapport du stage de perfectionnement 4 
+ 
+Chapitre 2 : Notions théoriques 
+ 
+ 
+Ce chapitre est facultatif , il figure dans le cas où le sujet du stage fait appel à des notions peu 
+communes ou pas encore étudiées à l’ISET, mais, indispensables à la bonne compréhension 
+du sujet du stage. 
+ 
+ 
+
+========================================
+PAGE 9
+========================================
+Chapitre 3 : Spécification des besoins 
+Guide de rédaction du rapport du stage de perfectionnement 5 
+ 
+Chapitre 3 : Spécification des besoins 
+ 
+ 
+Au niveau de ce chapitre, il faut expliquer en détail ce que l’ application est censée faire 
+(QUOI FAIRE) à travers l’inventaire des fonctionnalités de l’application. 
+Notons qu’il est important de rappeler, au niveau de l’introduction de ce chapitre, l’objectif du 
+projet. 
+Nous présentons, pour la suite, un exemple type d’une structure possible de  ce chapitre. 
+I. Besoins fonctionnels 
+Ce sont les besoins indispensables auxquels doit répondre l’application. 
+Par mesure de clarté, il est recommandé de présenter les  besoins sous forme WBS (Work 
+Breakdown Structure) ; en d’autres termes, indiquer les besoins globa ux puis les détailler. 
+Pour cela, il est possible d’utiliser les puces ou les numérotati ons comme suit : 
+1. Besoin global 1 
+ 1.1. Sous-besoin1 
+ 1.2. Sous-besoin 2 
+2. Besoin global 2 
+ 2.1. Sous-besoin1 
+ 2.2. Sous-besoin 2  
+II. Besoins non fonctionnels 
+Ce sont les besoins qui permettraient d’améliorer la qualité de s services de l’application 
+comme la convivialité et l’ergonomie des interfaces, l’amél ioration du temps de réponse,… 
+Il est, également, possible de les présenter sous forme de puces . 
+Remarque importante :  Pour les étudiants qui adoptent le langage de modélisation UML 
+, le 
+chapitre de spécification des besoins devrait comprendre les di agrammes de cas d’utilisation 
+dont nous détaillons dans la suite la structuration. 
+III. Diagrammes de cas d’utilisation 
+III.1. Présentation des acteurs 
+Au niveau de ce paragraphe, les différents acteurs de l’applicat ion sont présentés en bref. 
+III.2. Description des cas d’utilisation 
+Il existe globalement deux façons de présenter les cas d’utili sation, soit par acteur, soit par 
+fonctionnalité, les deux sont possibles. Généralement, si les f onctions des acteurs sont 
+
+========================================
+PAGE 10
+========================================
+Chapitre 3 : Spécification des besoins 
+Guide de rédaction du rapport du stage de perfectionnement 6 
+complètement indépendantes, c’est la première solution qui est  adoptée. Si en revanche, une 
+fonctionnalité du système fait intervenir plusieurs acteurs, c’est la deuxième possibilité qui est 
+adoptée. 
+Les cas d’utilisation présentant certaines ambiguïtés doivent être complétés par une 
+description textuelle (présentée au choix sous forme d’un paragra phe cohérent ou non). Celle- 
+ci comprend, essentiellement, les points suivants : 
+Objectif :  c’est le but du cas d’utilisation. 
+Pré-condition(s) : Condition(s) devant être remplie(s) pour exécuter le cas d’utilisa tion. 
+Enchaînement nominal  : C’est le scénario indiquant les étapes pour réaliser le cas d’utilisation 
+(il ne comprend pas d’alternatives) : il peut être, égalem ent, remplacé par un diagramme de 
+séquence . 
+Post-condition(s) :  Condition(s) nécessaire(s) pour que le cas d’utilisation soit c onsidéré 
+comme achevé. 
+Il est, également, possible de spécifier d’autres informations telles que les acteurs primaires et 
+secondaires ; tout dépend de la particularité du cas. 
+ 
+ 
+ 
+ 
+ 
+
+========================================
+PAGE 11
+========================================
+Chapitre 4 : Conception 
+Guide de rédaction du rapport du stage de perfectionnement 7 
+ 
+Chapitre 4 : Conception 
+ 
+ 
+Ce chapitre a pour objectif de présenter la solution conceptuelle  proposée par l’étudiant. En 
+d’autres termes, ce chapitre devrait répondre à la question COMM ENT FAIRE. 
+La conception est décrite par un ensemble de diagrammes re levant soit de la méthode 
+MERISE soit du langage de modélisation UML. 
+Notons que pour les sujets de configuration, de paramétrage ou d'inté gration, ce chapitre peut 
+être complètement omis. 
+La structure de ce chapitre dépend de la nature du suj et 
+; il est, vivement, recommandé 
+de s’adresser au corps enseignant pour tout conseil éventuel. 
+Nous illustrons, dans la suite, une structuration de ce chapitre d ans le cas d’un stage ayant 
+pour objectif de développer une application qui gère une base de données. 
+I. Conception de la base de données 
+La description de la conception de la base de données s’effectue en plusieurs étapes. 
+L’étudiant adopte la structuration appropriée pour ce chapitre, se lon son choix pour la 
+méthode MERISE ou  le langage UML. Pour chacun  de ces choix, nous proposons une 
+structuration possible de cette section. 
+I.1. Conception de la base de données en se basant sur la méthode 
+MERISE 
+La conception est décrite, principalement, par le Modèle Conce ptuel de Données (MCD) ; 
+mais, au préalable, il est primordial de spécifier le dict ionnaire de données. Il est, également, 
+important de préciser au niveau de cette section le Modèle Physique de Données (MPD) ainsi 
+que le modèle relationnel de données (MRD) ou MLD relationnel. Ainsi, la conception de la 
+base de données présente la structuration suivante : 
+I.1.1. Dictionnaire de données 
+Il s’agit de faire l’inventaire de l’ensemble des attri buts de la base de données en précisant 
+leurs désignations, leurs types et leurs significations. Par m esure de clarté, il est recommandé 
+de présenter les différents attributs classés par entités. 
+I.1.2. Modèle conceptuel de données 
+Le diagramme associé au modèle conceptuel de données est placé à c e niveau.  
+
+========================================
+PAGE 12
+========================================
+Chapitre 4 : Conception 
+Guide de rédaction du rapport du stage de perfectionnement 8 
+Il est impératif que le MCD ainsi que tous les diagrammes de conception soient tracés à l’aide 
+d’un outil  de conception approprié tels que POWER AMC ou AMC Designer.  
+Si le diagramme est très imposant, il est possible de le déc omposer en plusieurs parties.  
+Il est, également, possible de se limiter à la partie du modèle jugée la plus importante et placer 
+le reste des entités en annexes. 
+Si le nombre d’attributs d’une entité est considérable, il est, é galement, possible de se limiter 
+aux plus importants d’entre eux vu que les attributs ont déjà été dé finis au niveau du 
+dictionnaire de données. 
+I.1.3. Schéma relationnel de données 
+Le schéma relationnel de données se présente sous la forme de liste de relations déduites à 
+partir des entités et des relations du modèle. En outre, il met en exergue les clés primaires et 
+étrangères. 
+Dans le cas d’un MCD imposant, il suffit de montrer, à ce niveau, 3 ou 4 relations et de placer 
+la suite en annexes. 
+Remarque :  Mis à part la description textuelle du modèle logique de donnés, i l est possible de 
+présenter, en plus, le MLD en version graphique 
+II.2. Conception de la base de données en se basant  sur le langage 
+UML 
+La modélisation de la base de données est illustrée par le di agramme de classes. Cette section 
+comprend, généralement, les trois parties suivantes : 
+II.1. Description des classes 
+Les différentes classes voire les principales (si elles sont nombreuses) sont mentionnées et 
+décrites brièvement. 
+II.2. Diagramme de classes 
+Le diagramme de classes est placé au niveau de cette par tie. Il est possible d’intégrer la 
+description des classes, à ce niveau. 
+Dans le cas d’un diagramme de classes imposant, les remarqu es mentionnées, précédemment, 
+au niveau du MCD, sont aussi applicables. 
+II.3. Modèle relationnel  
+Il s’agit de traduire le diagramme de classes en modèle relationnel afin de montrer que 
+l’étudiant traduit, correctement, les classes et association s en tables. 
+
+========================================
+PAGE 13
+========================================
+Chapitre 4 : Conception 
+Guide de rédaction du rapport du stage de perfectionnement 9 
+Notons que les règles de passage du diagramme de classes au  modèle relationnel sont 
+analogues à celles du passage du MCD au MLD.  
+Dans le cas d’un diagramme de classes imposant, il suffit  de montrer 3 ou 4 relations et de 
+placer la suite en annexes. 
+II. Conception des traitements 
+Un intérêt particulier est porté aux traitements effectués par  l’application. 
+Si l’étudiant a opté pour la méthode MERISE, il modélise les tra itements à travers le Modèle 
+Conceptuel de Traitements (MCT). 
+Dans le cas où l’étudiant a opté pour une modélisation avec UML, les traitements peuvent être 
+illustrés par des diagrammes de séquence détaillés ou des diagra mmes d’activités. 
+Le choix d’un ou de plusieurs diagrammes de conception dépend du sujet.  
+Attention !! Il faut sélectionner les traitements jugés l es plus importants ; la qualité de la 
+conception n’est pas évaluée en fonction du nombre de diagrammes représe ntés ! 
+Notons que chaque diagramme doit, impérativement, être suivi d’une  explication textuelle en 
+quelques phrases. 
+Selon, la spécificité du sujet, la conception peut dif férer. Il est recommandé à l’étudiant 
+de s’adresser au corps enseignant pour lui porter conseil. 
+
+========================================
+PAGE 14
+========================================
+Chapitre 5 : Réalisation 
+Guide de rédaction du rapport du stage de perfectionnement 10 
+ 
+Chapitre 5: Réalisation 
+ 
+ 
+Ce chapitre a pour objectif majeur de présenter le « produit fini  », c'est-à-dire ce que 
+l’étudiant a développé. 
+Pour cela, ce chapitre est, généralement, 
+ composé de deux parties. La première partie détaille 
+l’environnement de développement. La seconde partie concerne la mi se en œuvre de la 
+solution proposée par l’étudiant en présentant les principales interfac es graphiques. 
+Pour les sujets de stage de configuration ou d’intégration, le dé ploiement et l’implémentation 
+peuvent être détaillés. 
+I. Environnement de développement 
+I.1. Environnement matériel 
+C’est l’environnement sous lequel l’étudiant a développé son applic ation : les caractéristiques 
+de l’ordinateur telles que la fréquence du processeur, la tail le de la mémoire centrale ou s’il 
+s’agit d’une application réseau, les routeurs ou hubs, serveurs,… 
+I.2. Environnement logiciel 
+Ce sont les outils logiciels utilisés pour le développement de l ’application ou de la base de 
+données, la modélisation des différents diagrammes de conception,… 
+II. Principales interfaces graphiques 
+Au niveau de cette rubrique, il faut placer les principales  interfaces graphiques développées 
+qui devraient être toutes commentées par un paragraphe de 2 à 3 lignes expliquant son 
+contenu. 
+A noter qu’il ne faut pas placer toutes les interfaces de l’application 
+, mais uniquement les plus 
+importantes et celles qui seraient différentes. Les autres i nterfaces sont placées en annexes. 
+ 
+
+========================================
+PAGE 15
+========================================
+Conclusion générale 
+Guide de rédaction du rapport du stage de perfectionnement 11 
+ 
+Conclusion générale  
+ 
+La conclusion du rapport doit comprendre, impérativement, un rappel de l’objectif du stage de 
+perfectionnement et une récapitulation du travail fait en présen tant les résultats (en d’autres 
+termes, les réponses aux problèmes posés au début). 
+Il est, également, recommandé de porter un œil critique sur  le travail fait en soulevant 
+certaines insuffisances ou améliorations possibles.  
+Remarque :  La conclusion devrait être rédigée en une page sous forme d’un paragraphe et 
+non pas de tirets. 
+
+========================================
+PAGE 16
+========================================
+Bibliographie et Nétographie 
+Guide de rédaction du rapport du stage de perfectionnement 12 
+ 
+Bibliographie et Nétographie 
+ 
+Cette partie comprend les différents livres, articles, r evues et sites internet qui ont servi à la 
+documentation.  
+Bibliographie [Obligatoire] 
+L’ordre de ces références peut se faire soit par ordre al phabétique du nom de l’auteur soit par 
+ordre d’apparition dans le rapport. 
+[i] NOM_AUTEUR, Prénom. « Titre de l’ouvrage », lieu de publ ication, nom de l’éditeur, 
+année de publication, nombre de tomes, nombre de pages.  
+S’il s’agit d’un rapport de PFE, par exemple, on peut ajouter le numéro d’ordre (référence) 
+associé. (i= 1, 2, …,n). 
+Exemple : 
+[1] REEVES, Hubert. « Bases de données relationnelles », Par is, Editions du seuil, 1988, 
+288p.  
+Nétographie 
+Sites Web visités lors de l’élaboration du projet, avec une brève description du thème consulté 
+(une ou deux lignes au maximum). 
+Exemple : 
+[2] http://www.asp.net/ : Fondements du langage ASP.NET. 
+ 
+A ne pas mentionner : 
+• Les moteurs de recherche tels que www.google.fr 
+ ou www.yahoo.fr  
+• Les cours étudiés au niveau de l’ISET ; ils sont considérés  comme faisant partie des 
+connaissances acquises et assimilées par les étudiants. 
+ 
+Il est impératif de référencer  la bibliographie et nétographie au niveau du rapport !! 
+ 
+ 
+
+========================================
+PAGE 17
+========================================
+ 
+  
+ 
+
+
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ANNEXE A : Que placer en annexes ? 
+ 
+ 
+ANNEXE B : Proposition de mise en forme 
+ 
+ 
+ANNEXE C : Diverses recommandations 
+ 
+ 
+[Les annexes sont facultatives et ne suivent pas de régles  par ticulières] 
+
+========================================
+PAGE 18
+========================================
+Annexe A : Que placer en annexes ? 
+ 
+Guide de rédaction du rapport du stage de perfectionnement 14 
+ 
+ANNEXE A : Que placer en annexes ? 
+ 
+ 
+L’annexe présente un complément de documents qui ne sont pas indispe nsables à la 
+compréhension du projet, mais qui présentent un certain intérêt. Ces doc uments peuvent être : 
+- Des explications plus détaillées liées au thème du projet, à  l’environnement de 
+développement,…, 
+- Des documents qui ont servi de base pour le développement de l’appl ication comme 
+des fiches et formulaires remis par la société d’accueil, 
+- Des interfaces de l’application qui ne figurent pas au niveau de la réalisation, 
+- Des diagrammes non présentés précédemment, 
+- Des bouts de code illustrant soit la difficulté de l’impléme ntation soit l’originalité liée 
+au codage ou au langage de développement, 
+- … 
+ 
+
+========================================
+PAGE 19
+========================================
+Annexe B : Proposition de mise en forme 
+Guide de rédaction du rapport du stage de perfectionnement 15 
+ 
+ANNEXE B : Proposition de mise en forme 
+ 
+ 
+Cette annexe présente différentes recommandations relatives à l a mise en forme du rapport 
+I. Titres et  sous-titres 
+- Il est recommandé de précéder le titre du chapitre par son numér o (Chapitre 1 : …), 
+- Les titres et sous-titres doivent être sur le même nivea u vertical, 
+- On peut distinguer les niveaux de titres et sous-titres par la taille de police, 
+- A ne pas utiliser « : » à la fin d’un titre ou d’un sous-titre,  
+- Les titres et sous titres ne sont ni soulignés ni écrits en italique, 
+- Un titre ou sous-titre ne doit jamais figurer en fin de page. 
+Remarque :  Le titre d’un chapitre peut être placé sur une page indépendant e ; dans ce cas, la 
+page en question devrait être comptabilisée mais non numérotée e t ne devrait comporter ni 
+entête ni pied de page. La page d’après (contenant le corps du cha pitre) ne doit porter aucun 
+titre. En d’autres termes, le titre d’un chapitre doit être m entionné une seule fois. 
+II. Corps du texte 
+- Justifié, 
+- Interligne : 1.5, 
+- Police : Times New Roman, 12 pts. 
+III. Puces 
+- Il faut adopter le même type de puces pour tout le rapport et conse rver le même retrait, 
+- Chaque puce finit par une virgule« , » à l’exception de la dernière qui finit par un 
+point « . ». 
+IV. Entête et pied de page 
+1. L’entête peut contenir : 
+1.1. Le titre du chapitre courant 
+1.2. Une ligne le séparant du texte de la page 
+2. Le pied de page peut contenir : 
+2.1. Le numéro de page 
+2.2. Le titre du projet de fin d’études 
+
+========================================
+PAGE 20
+========================================
+Annexe B : Proposition de mise en forme 
+Guide de rédaction du rapport du stage de perfectionnement 16 
+2.3. Une ligne le séparant du texte de la page 
+Remarque :  Il n’est pas apprécié de mentionner le nom de l’étudiant ou de la société en entête 
+ou pied de page dans la mesure où elle ne présente aucune plus-value. 
+V. Marges 
+ 2.5 cm (haut, bas, droite, gauche) 
+VI. Couleurs 
+A éviter sauf en cas de besoin (Interfaces de l’application, …) 
+VII. Numérotation des pages 
+- La pagination débute au niveau de l’introduction. 
+- Les annexes peuvent avoir une numérotation différente du reste du rappor t. 
+ 
+ 
+
+========================================
+PAGE 21
+========================================
+Annexe C : Diverses recommandations 
+Guide de rédaction du rapport du stage de perfectionnement 17 
+ 
+ANNEXE C : Diverses recommandations 
+ 
+1) Les annexes sont facultatives ; elles pourraient, éventuellem ent, comprendre un 
+complément d’interfaces graphiques qui n’ont pas été mentionnées au  niveau du rapport. 
+Si une partie de la programmation est jugée intéressante ou innovante, il est possible de 
+placer le code source en annexes. De même, certaines notions t héoriques pourraient être 
+détaillées au niveau des annexes. 
+2) Le temps à employer au niveau du rapport est impérativement le présent , 
+3) Il est préférable d’utiliser l’impersonnel, sinon, le pronom per sonnel Nous  même si le 
+stage est effectué par un seul étudiant. 
+4) Tous les chapitres doivent être équilibrés dans la mesure où l e nombre de pages devrait 
+être, approximativement, le même. 
+5) Le nombre de pages d’un rapport de stage de perfectionnement (de l’i ntroduction à la 
+conclusion) ne devrait pas excéder 30 pages  (entre 15 et 30 pages généralement). 
+L’objectif visé est la qualité et non la quantité. 

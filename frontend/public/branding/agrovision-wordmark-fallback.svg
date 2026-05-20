@@ -1,0 +1,12 @@
+<svg width="1200" height="260" viewBox="0 0 1200 260" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="txt" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#264b24"/>
+      <stop offset="100%" stop-color="#4f8b3a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="260" rx="40" fill="#ecf4e6"/>
+  <text x="50" y="176" font-size="148" font-family="Outfit, Arial, sans-serif" font-weight="700" fill="url(#txt)">
+    AgroVision
+  </text>
+</svg>

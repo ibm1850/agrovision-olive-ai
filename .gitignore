@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.venv312/
+venv/
+.pytest_cache/
+.env
+.env.*
+
+# Runtime logs
+*.log
+uvicorn_startup.out.log
+uvicorn_startup.err.log
+
+# Data and artifacts
+data/*.db
+data/cropped_olives/
+data/observations/
+data/disease_training_data/
+data/disease_training_data_all/
+data/disease_training_data_public_base/
+data/olive_tree_diseases_v1_imagefolder/
+data/openai_olive_imagefolder/
+data/*_imagefolder/
+models/**/*.json
+models/**/*.png
+models/**/*.csv
+models/**/*.pt
+models/**/*.pkl
+models/**/*.joblib
+!models/olive_detector_best.pt
+!models/harvest_rf.joblib
+!models/olive_harvest_model.pkl
+!models/curated/leaf_disease_model.pt
+!models/curated/plant_part_router.pt
+models/curated/_prepared_datasets/
+yolo*.pt
+runs/
+tmp/
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/.env
+frontend/.env.*
+
+# OS
+.DS_Store
+Thumbs.db
