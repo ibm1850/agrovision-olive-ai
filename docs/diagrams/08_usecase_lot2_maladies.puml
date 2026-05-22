@@ -1,0 +1,30 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+actor "Agriculteur" as Farmer
+
+rectangle "Détection des maladies" {
+  usecase "Accéder au module\nde détection" as UC_ACCESS
+  usecase "Lancer une détection\nde maladie" as UC_SCAN
+  usecase "Téléverser\nune image" as UC_UPLOAD
+  usecase "Vérifier la qualité\nde l'image" as UC_QUALITY
+  usecase "Identifier la partie\nvégétale" as UC_ROUTE
+  usecase "Analyser la feuille" as UC_CLASSIFY
+  usecase "Afficher le résultat,\nla confiance et la recommandation" as UC_RESULT
+  usecase "Retourner un résultat\nincertain" as UC_UNCERTAIN
+}
+
+Farmer --> UC_ACCESS
+Farmer --> UC_SCAN
+
+UC_SCAN .> UC_UPLOAD : <<include>>
+UC_SCAN .> UC_QUALITY : <<include>>
+UC_SCAN .> UC_ROUTE : <<include>>
+UC_SCAN .> UC_CLASSIFY : <<include>>
+UC_SCAN .> UC_RESULT : <<include>>
+UC_UNCERTAIN .> UC_SCAN : <<extend>>
+@enduml
+

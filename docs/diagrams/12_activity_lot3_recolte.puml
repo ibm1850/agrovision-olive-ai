@@ -1,0 +1,26 @@
+@startuml
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+start
+:Accéder au module\nPériode de récolte;
+:Importer une image;
+:Vérifier la qualité;
+if (Image exploitable ?) then (Oui)
+  :Analyser l'image;
+  :Estimer la maturité visuelle;
+  :Récupérer les données de ferme;
+  :Récupérer la météo Open-Meteo;
+  :Combiner données visuelles\net contextuelles;
+  if (Données suffisantes\net cohérentes ?) then (Oui)
+    :Générer la recommandation;
+  else (Non)
+    :Générer une recommandation prudente;
+  endif
+else (Non)
+  :Demander une image plus claire;
+  :Générer une recommandation prudente;
+endif
+stop
+@enduml
+

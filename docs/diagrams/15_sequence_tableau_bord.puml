@@ -1,0 +1,25 @@
+@startuml
+hide footbox
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+actor "Agriculteur" as Farmer
+boundary "Interface Web\nReact / Vite" as UI
+control "API Backend\nFastAPI" as API
+control "Service Tableau\nde bord" as Dashboard
+database "Base SQLite" as DB
+control "Open-Meteo" as Weather
+
+Farmer -> UI : Ouvrir le tableau de bord
+UI -> API : GET /farm/{id}/dashboard
+API -> Dashboard : Construire la synthèse
+Dashboard -> DB : Lire ferme, scans,\nhistorique, alertes
+DB --> Dashboard : Données internes
+Dashboard -> Weather : Demander météo
+Weather --> Dashboard : Données météo
+Dashboard -> Dashboard : Organiser les indicateurs
+Dashboard --> API : Synthèse du tableau de bord
+API --> UI : JSON
+UI --> Farmer : Afficher indicateurs
+@enduml
+

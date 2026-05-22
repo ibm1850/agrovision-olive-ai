@@ -1,0 +1,27 @@
+@startuml
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+start
+:Image importée;
+:Contrôle qualité de l'image;
+if (Image exploitable ?) then (Oui)
+  :Routage de la partie végétale;
+  if (Partie supportée ?) then (Feuille)
+    :Classification foliaire\nEfficientNet-B0;
+    :Application du seuil de confiance\net des règles expertes;
+    if (Confiance suffisante ?) then (Oui)
+      :Diagnostic, confiance,\nrecommandation;
+    else (Non)
+      :Résultat incertain;
+    endif
+  else (Non)
+    :Résultat incertain\npartie non supportée;
+  endif
+else (Non)
+  :Demander une image plus claire;
+  :Résultat incertain;
+endif
+stop
+@enduml
+

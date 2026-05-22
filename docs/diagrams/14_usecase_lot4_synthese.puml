@@ -1,0 +1,35 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+actor "Agriculteur" as Farmer
+actor "Service météo\nOpen-Meteo" as Weather <<service>>
+
+rectangle "Synthèse et aide à la décision" {
+  usecase "Consulter le tableau\nde bord" as UC_DASH
+  usecase "Afficher les indicateurs\nprincipaux" as UC_INDICATORS
+  usecase "Consulter\nl'historique" as UC_HISTORY
+  usecase "Consulter les alertes\net recommandations" as UC_ALERTS
+  usecase "Générer la prévision\nde production" as UC_PROD
+  usecase "Afficher la production\nestimée" as UC_PROD_RESULT
+  usecase "Interagir avec\nl'assistant intelligent" as UC_ASSIST
+  usecase "Proposer une réponse\nadaptée" as UC_ANSWER
+  usecase "Récupérer les données\nmétéorologiques" as UC_WEATHER
+}
+
+Farmer --> UC_DASH
+Farmer --> UC_HISTORY
+Farmer --> UC_ALERTS
+Farmer --> UC_PROD
+Farmer --> UC_ASSIST
+Weather --> UC_WEATHER
+
+UC_DASH .> UC_INDICATORS : <<include>>
+UC_DASH .> UC_WEATHER : <<include>>
+UC_PROD .> UC_PROD_RESULT : <<include>>
+UC_PROD .> UC_WEATHER : <<include>>
+UC_ASSIST .> UC_ANSWER : <<include>>
+@enduml
+

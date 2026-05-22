@@ -1,0 +1,42 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+actor "Agriculteur" as Farmer
+actor "Service météo\nOpen-Meteo" as Weather <<service>>
+
+rectangle "AgroVision Olive AI" {
+  usecase "Configurer\nla ferme" as UC_FARM
+  usecase "Lancer une détection\nde maladie" as UC_DISEASE
+  usecase "Estimer la période\nde récolte" as UC_HARVEST
+  usecase "Consulter la prévision\nde production" as UC_PROD
+  usecase "Consulter le tableau\nde bord" as UC_DASH
+  usecase "Consulter\nl'historique" as UC_HISTORY
+  usecase "Consulter les alertes\net recommandations" as UC_ALERTS
+  usecase "Interagir avec\nl'assistant intelligent" as UC_ASSIST
+
+  usecase "Récupérer les données\nmétéorologiques" as UC_WEATHER
+}
+
+Farmer --> UC_FARM
+Farmer --> UC_DISEASE
+Farmer --> UC_HARVEST
+Farmer --> UC_PROD
+Farmer --> UC_DASH
+Farmer --> UC_HISTORY
+Farmer --> UC_ALERTS
+Farmer --> UC_ASSIST
+
+UC_HARVEST .> UC_WEATHER : <<include>>
+UC_PROD .> UC_WEATHER : <<include>>
+UC_DASH .> UC_WEATHER : <<include>>
+Weather --> UC_WEATHER
+
+note bottom of UC_DISEASE
+Le résultat peut être sain,
+malade, non supporté ou incertain.
+end note
+@enduml
+

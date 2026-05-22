@@ -1,0 +1,29 @@
+@startuml
+hide footbox
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+actor "Agriculteur" as Farmer
+boundary "Interface Web\nReact / Vite" as UI
+control "API Backend\nFastAPI" as API
+boundary "Carte interactive\nReact Leaflet" as Map
+database "Base SQLite" as DB
+
+Farmer -> UI : Ouvrir la configuration
+UI -> API : GET /farm/profile
+API -> DB : Lire le profil existant
+DB --> API : Profil ou liste vide
+API --> UI : Données de ferme
+
+Farmer -> UI : Saisir les informations
+Farmer -> Map : Sélectionner une position
+Map --> UI : latitude, longitude
+
+UI -> UI : Valider le formulaire
+UI -> API : POST/PUT /farm/profile
+API -> DB : Enregistrer les données
+DB --> API : Confirmation
+API --> UI : Profil sauvegardé
+UI --> Farmer : Message de succès
+@enduml
+

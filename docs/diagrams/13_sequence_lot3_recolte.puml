@@ -1,0 +1,31 @@
+@startuml
+hide footbox
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+actor "Agriculteur" as Farmer
+boundary "Interface Web\nReact / Vite" as UI
+control "API Backend\nFastAPI" as API
+control "Service Période\nde récolte" as Harvest
+database "Base SQLite" as DB
+control "Open-Meteo" as Weather
+
+Farmer -> UI : Importer image + paramètres
+UI -> API : POST /predict-harvest-image
+API -> Harvest : Estimer période de récolte
+Harvest -> Harvest : Vérifier qualité image
+
+alt Image insuffisante
+  Harvest --> API : Recommandation prudente
+else Image exploitable
+  Harvest -> DB : Lire profil de ferme
+  DB --> Harvest : Cultivar, localisation, âge
+  Harvest -> Weather : Récupérer météo
+  Weather --> Harvest : Données climatiques
+  Harvest -> Harvest : Fusion image + ferme + météo
+  Harvest --> API : Recommandation + confiance
+end
+
+API --> UI : Résultat structuré
+UI --> Farmer : Afficher recommandation
+@enduml

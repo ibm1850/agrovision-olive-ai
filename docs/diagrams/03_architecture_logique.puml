@@ -1,0 +1,28 @@
+@startuml
+skinparam componentStyle rectangle
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+package "Couche présentation" {
+  [Interface web\nReact / Vite] as Frontend
+}
+
+package "Couche applicative" {
+  [API FastAPI] as API
+  [Services métier] as Services
+  [Services IA / CV] as AI
+}
+
+package "Couche données" {
+  database "SQLite" as DB
+}
+
+cloud "Open-Meteo" as Weather
+
+Frontend --> API : Requêtes HTTP / JSON
+API --> Services : Orchestration
+Services --> AI : Analyse d'images
+Services --> DB : Lecture / écriture
+Services --> Weather : Données météo
+@enduml
+

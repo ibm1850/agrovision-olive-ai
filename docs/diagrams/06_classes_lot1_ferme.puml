@@ -1,0 +1,42 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+class FarmProfile {
+  +id: int
+  +farm_name: string
+  +owner_name: string
+  +country: string
+  +region: string
+  +latitude: float
+  +longitude: float
+  +primary_cultivar: string
+  +tree_count: int
+  +tree_age: int
+  +irrigation_mode: string
+  +notes: text
+}
+
+class TreeGroup {
+  +id: int
+  +farm_id: int
+  +label: string
+  +cultivar: string
+  +tree_count: int
+  +tree_age: int
+}
+
+class FarmNote {
+  +id: int
+  +farm_id: int
+  +title: string
+  +content: text
+  +status: string
+  +created_at: datetime
+}
+
+FarmProfile "1" *-- "0..*" TreeGroup : possede
+FarmProfile "1" o-- "0..*" FarmNote : contient
+@enduml
+

@@ -1,0 +1,30 @@
+@startuml
+hide footbox
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+actor "Agriculteur" as Farmer
+boundary "Interface Web\nReact / Vite" as UI
+control "API Backend\nFastAPI" as API
+control "Service Production" as Production
+database "Base SQLite" as DB
+control "Open-Meteo" as Weather
+
+Farmer -> UI : Ouvrir le module production
+UI -> API : Demander une prévision
+API -> Production : Calculer estimation
+Production -> DB : Lire paramètres de ferme\net historique
+DB --> Production : Données disponibles
+Production -> Weather : Récupérer météo
+Weather --> Production : Pluie, température
+Production -> Production : Calculer facteurs\nâge, pluie, cultivar,\nirrigation, maladie
+
+alt Données suffisantes
+  Production --> API : Plage estimative + confiance
+else Données manquantes
+  Production --> API : Estimation prudente + avertissements
+end
+
+API --> UI : Résultat structuré
+UI --> Farmer : Afficher plage estimative
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+node "Navigateur utilisateur" as Browser {
+  artifact "Application React\nbuild Vite" as SPA
+}
+
+node "Serveur applicatif" as Server {
+  component "FastAPI" as API
+  artifact "Modèles IA\nEfficientNet-B0" as Models
+  database "SQLite\nanalysis_history.db" as DB
+}
+
+cloud "Service externe\nOpen-Meteo" as Weather
+
+SPA --> API : HTTPS / HTTP
+API --> DB : SQL local
+API --> Models : Inférence
+API --> Weather : API météo
+@enduml
+

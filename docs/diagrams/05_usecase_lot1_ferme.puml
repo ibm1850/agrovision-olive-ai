@@ -1,0 +1,32 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+actor "Agriculteur" as Farmer
+
+rectangle "Configuration de la ferme" {
+  usecase "Accéder à l'interface\nde configuration" as UC_ACCESS
+  usecase "Configurer\nla ferme" as UC_CONFIG
+  usecase "Saisir les informations\nde la ferme" as UC_INFO
+  usecase "Sélectionner la localisation\nsur la carte" as UC_LOC
+  usecase "Choisir une ville" as UC_CITY
+  usecase "Utiliser ma position\nactuelle" as UC_GPS
+  usecase "Valider le formulaire" as UC_VALIDATE
+  usecase "Enregistrer les données\ndans la base" as UC_SAVE
+  usecase "Gérer les groupes\nd'arbres" as UC_GROUPS
+}
+
+Farmer --> UC_ACCESS
+Farmer --> UC_CONFIG
+Farmer --> UC_GROUPS
+
+UC_CONFIG .> UC_INFO : <<include>>
+UC_CONFIG .> UC_LOC : <<include>>
+UC_CONFIG .> UC_VALIDATE : <<include>>
+UC_CONFIG .> UC_SAVE : <<include>>
+UC_CITY .> UC_LOC : <<extend>>
+UC_GPS .> UC_LOC : <<extend>>
+@enduml
+

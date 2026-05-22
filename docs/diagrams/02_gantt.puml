@@ -1,0 +1,14 @@
+@startgantt
+Project starts 2026-02-03
+printscale weekly
+
+[Analyse des besoins] lasts 2 weeks
+[Conception] starts at [Analyse des besoins]'s end and lasts 2 weeks
+[Lot 1 : Configuration de la ferme] starts at [Conception]'s end and lasts 2 weeks
+[Lot 2 : Détection des maladies] starts at [Lot 1 : Configuration de la ferme]'s end and lasts 3 weeks
+[Lot 3 : Période de récolte] starts at [Lot 2 : Détection des maladies]'s end and lasts 2 weeks
+[Lot 4 : Tableau de bord, production et assistant] starts at [Lot 3 : Période de récolte]'s end and lasts 3 weeks
+[Tests et validation] starts at [Lot 4 : Tableau de bord, production et assistant]'s end and lasts 2 weeks
+[Rédaction du rapport] starts at [Tests et validation]'s start and lasts 3 weeks
+@endgantt
+

@@ -1,0 +1,36 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+actor "Agriculteur" as Farmer
+actor "Service météo\nOpen-Meteo" as Weather <<service>>
+
+rectangle "Période de récolte" {
+  usecase "Accéder au module\nPériode de récolte" as UC_ACCESS
+  usecase "Estimer la période\nde récolte" as UC_ESTIMATE
+  usecase "Importer une image\ndes olives" as UC_UPLOAD
+  usecase "Vérifier la qualité\nde l'image" as UC_QUALITY
+  usecase "Estimer le stade\nde maturité" as UC_MATURITY
+  usecase "Récupérer les données\nde la ferme" as UC_FARM
+  usecase "Récupérer les données\nmétéorologiques" as UC_WEATHER
+  usecase "Combiner les données\nvisuelles et contextuelles" as UC_FUSION
+  usecase "Afficher la recommandation\nde récolte" as UC_RESULT
+  usecase "Retourner une recommandation\nprudente" as UC_CAUTIOUS
+}
+
+Farmer --> UC_ACCESS
+Farmer --> UC_ESTIMATE
+Weather --> UC_WEATHER
+
+UC_ESTIMATE .> UC_UPLOAD : <<include>>
+UC_ESTIMATE .> UC_QUALITY : <<include>>
+UC_ESTIMATE .> UC_MATURITY : <<include>>
+UC_ESTIMATE .> UC_FARM : <<include>>
+UC_ESTIMATE .> UC_WEATHER : <<include>>
+UC_ESTIMATE .> UC_FUSION : <<include>>
+UC_ESTIMATE .> UC_RESULT : <<include>>
+UC_CAUTIOUS .> UC_ESTIMATE : <<extend>>
+@enduml
+

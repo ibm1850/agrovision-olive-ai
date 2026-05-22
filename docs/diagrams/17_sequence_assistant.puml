@@ -1,0 +1,27 @@
+@startuml
+hide footbox
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+actor "Agriculteur" as Farmer
+boundary "Interface Web\nReact / Vite" as UI
+control "API Backend\nFastAPI" as API
+control "Service Assistant" as Assistant
+database "Base SQLite" as DB
+
+Farmer -> UI : Poser une question
+UI -> API : POST /chat
+API -> Assistant : Analyser la question
+Assistant -> DB : Récupérer contexte\nferme, scans, alertes
+DB --> Assistant : Contexte disponible
+
+alt Contexte suffisant
+  Assistant -> Assistant : Générer une réponse adaptée
+else Contexte insuffisant
+  Assistant -> Assistant : Préparer une réponse de fallback
+end
+
+Assistant --> API : Réponse
+API --> UI : JSON
+UI --> Farmer : Afficher la réponse
+@enduml

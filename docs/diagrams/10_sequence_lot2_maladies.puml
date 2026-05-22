@@ -1,0 +1,40 @@
+@startuml
+hide footbox
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+actor "Agriculteur" as Farmer
+boundary "Interface Web\nReact / Vite" as UI
+control "API Backend\nFastAPI" as API
+control "Service Détection\ndes maladies" as Service
+control "Routeur de partie\nvégétale" as Router
+control "Modèle foliaire\nEfficientNet-B0" as Model
+database "Base SQLite" as DB
+
+Farmer -> UI : Importer une image
+UI -> API : POST /disease-scan-expert
+API -> Service : Traiter l'image
+Service -> Service : Vérifier format et qualité
+
+alt Image non exploitable
+  Service --> API : Résultat incertain
+else Image exploitable
+  Service -> Router : Identifier la partie végétale
+  alt Partie non supportée
+    Router --> Service : Non supportée
+    Service --> API : Résultat incertain
+  else Feuille supportée
+    Router --> Service : Feuille
+    Service -> Model : Classifier l'image
+    Model --> Service : Classe + confiance
+    Service -> Service : Appliquer seuils et règles expertes
+    opt Résultat exploitable
+      Service -> DB : Sauvegarder l'analyse
+    end
+    Service --> API : Diagnostic ou résultat incertain
+  end
+end
+
+API --> UI : Réponse structurée
+UI --> Farmer : Afficher résultat et recommandation
+@enduml

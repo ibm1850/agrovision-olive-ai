@@ -1,0 +1,71 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+class User {
+  +id: int
+  +name: string
+  +role: string
+}
+
+class FarmProfile {
+  +id: int
+  +farm_name: string
+  +region: string
+  +latitude: float
+  +longitude: float
+  +primary_cultivar: string
+}
+
+class TreeGroup {
+  +id: int
+  +cultivar: string
+  +tree_count: int
+  +tree_age: int
+}
+
+class DiseaseScan {
+  +id: int
+  +result: string
+  +confidence: float
+  +recommendation: text
+}
+
+class HarvestEstimate {
+  +id: int
+  +status: string
+  +confidence: float
+  +recommendation: text
+}
+
+class ProductionForecast {
+  +id: int
+  +min_estimate: float
+  +max_estimate: float
+  +confidence: float
+}
+
+class FarmAlert {
+  +id: int
+  +level: string
+  +message: text
+  +status: string
+}
+
+class AssistantMessage {
+  +id: int
+  +question: text
+  +answer: text
+  +created_at: datetime
+}
+
+User "1" -- "0..*" FarmProfile : gere
+FarmProfile "1" *-- "0..*" TreeGroup : possede
+FarmProfile "1" o-- "0..*" DiseaseScan : genere
+FarmProfile "1" o-- "0..*" HarvestEstimate : genere
+FarmProfile "1" o-- "0..*" ProductionForecast : genere
+FarmProfile "1" o-- "0..*" FarmAlert : recoit
+FarmProfile "1" o-- "0..*" AssistantMessage : contextualise
+@enduml
+
