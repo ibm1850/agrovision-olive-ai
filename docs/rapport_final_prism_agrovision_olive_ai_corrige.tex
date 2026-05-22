@@ -1,0 +1,1378 @@
+% chktex-file 1
+% chktex-file 8
+% chktex-file 13
+% chktex-file 24
+% chktex-file 26
+% chktex-file 44
+\documentclass[12pt,a4paper]{report}
+
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage{lmodern}
+\else
+  \usepackage{fontspec}
+  \setmainfont{TeX Gyre Termes}
+\fi
+
+\usepackage[french,shorthands=off]{babel}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{ragged2e}
+\usepackage[hidelinks,hypertexnames=false,pdftitle={AgroVision Olive AI},pdfauthor={Iyed Ben Mohamed}]{hyperref}
+\usepackage{caption}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{url}
+
+\geometry{top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm}
+\onehalfspacing
+\raggedbottom
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\setlength{\LTpre}{0pt}
+\setlength{\LTpost}{0pt}
+\emergencystretch=3em
+\hbadness=10000
+\vbadness=10000
+\hfuzz=200pt
+\vfuzz=10pt
+\sloppy
+
+\captionsetup{font=small,labelfont=bf}
+\setlist[itemize]{label=--,leftmargin=1.1cm}
+\setlist[enumerate]{leftmargin=1.1cm}
+
+\newcommand{\yesmark}{\textcolor{green!50!black}{\textbf{Oui}}}
+\newcommand{\nomark}{\textcolor{red!70!black}{\textbf{Non}}}
+
+\newcommand{\placeholderfigure}[3]{%
+\begin{figure}[H]
+    \centering
+    \fbox{%
+    \begin{minipage}[c][#2][c]{0.88\textwidth}
+        \centering
+        \textbf{Emplacement réservé}\par
+        \vspace{0.25cm}
+        #1
+    \end{minipage}%
+    }
+    \caption{#3}
+\end{figure}
+}
+
+\newcommand{\insertimage}[4]{%
+\begin{figure}[H]
+    \centering
+    \IfFileExists{#1}{%
+        \includegraphics[#2]{#1}%
+    }{%
+        \fbox{%
+        \begin{minipage}[c][5cm][c]{0.88\textwidth}
+            \centering
+            \textbf{Image à insérer}\par
+            \vspace{0.2cm}
+            \texttt{\detokenize{#1}}
+        \end{minipage}%
+        }%
+    }
+    \caption{#3}
+    \label{#4}
+\end{figure}
+}
+
+\begin{document}
+
+% ==========================================================
+% PAGE DE GARDE
+% ==========================================================
+\begin{titlepage}
+\centering
+\vspace*{0.8cm}
+
+{\Large \textbf{République Tunisienne}}\\[0.2cm]
+{\large \textbf{Ministère de l'Enseignement Supérieur et de la Recherche Scientifique}}\\[0.4cm]
+{\large \textbf{Faculté des Sciences de Monastir}}\\[0.2cm]
+{\large \textbf{Filière : Génie Logiciel}}\\[1.1cm]
+
+{\Huge \textbf{Rapport de Projet de Fin d'Études}}\\[0.8cm]
+
+{\LARGE \textbf{AgroVision Olive AI}}\\[0.25cm]
+{\Large Plateforme intelligente d'aide à la décision pour l'oléiculture tunisienne}\\[1cm]
+
+\placeholderfigure{Logo de l'application AgroVision Olive AI}{3.2cm}{Logo de l'application AgroVision Olive AI}
+
+\vfill
+
+\begin{flushleft}
+\textbf{Réalisé par :} Iyed Ben Mohamed\\
+\textbf{Encadrant académique :} Mohsen Maraoui\\
+\textbf{Encadrant professionnel :} Ali Ben Dhiab\\
+\textbf{Organisme d'accueil :} Institut de l'Olivier de Sousse\\
+\textbf{Année universitaire :} 2025/2026
+\end{flushleft}
+
+\vfill
+\end{titlepage}
+
+% ==========================================================
+% FRONT MATTER
+% ==========================================================
+\pagenumbering{roman}
+
+\chapter*{Dédicace}
+\addcontentsline{toc}{chapter}{Dédicace}
+
+Je dédie ce travail à ma famille, pour son soutien constant, ses encouragements et sa confiance tout au long de mon parcours universitaire.
+
+Je le dédie également à toutes les personnes qui m'ont accompagné, conseillé et encouragé durant la réalisation de ce projet de fin d'études.
+
+\chapter*{Remerciements}
+\addcontentsline{toc}{chapter}{Remerciements}
+
+Je tiens à exprimer mes sincères remerciements à toutes les personnes qui ont contribué, de près ou de loin, à la réalisation de ce projet de fin d'études.
+
+Je remercie particulièrement mon encadrant académique, Monsieur Mohsen Maraoui, pour son accompagnement, ses conseils et ses orientations durant les différentes étapes de ce travail.
+
+Je remercie également mon encadrant professionnel, Monsieur Ali Ben Dhiab, pour son suivi, ses remarques et son aide dans la compréhension du contexte oléicole.
+
+Mes remerciements s'adressent aussi à la Faculté des Sciences de Monastir et à l'Institut de l'Olivier de Sousse pour le cadre scientifique et professionnel offert à ce projet.
+
+Enfin, j'adresse mes remerciements à ma famille, à mes proches et à toutes les personnes qui m'ont soutenu durant cette période.
+
+\tableofcontents
+\listoftables
+\listoffigures
+
+\chapter*{Liste des acronymes}
+\addcontentsline{toc}{chapter}{Liste des acronymes}
+
+\begin{center}
+\begin{tabular}{|p{3cm}|p{10cm}|}
+\hline
+\textbf{Acronyme} & \textbf{Signification} \\
+\hline
+API & Interface de programmation d'application \\
+\hline
+IA & Intelligence artificielle \\
+\hline
+CV & Vision par ordinateur \\
+\hline
+CNN & Réseau de neurones convolutif \\
+\hline
+HTTP & Protocole de transfert hypertexte \\
+\hline
+JSON & Format léger d'échange de données \\
+\hline
+PFE & Projet de Fin d'Études \\
+\hline
+SQL & Langage de requête structuré \\
+\hline
+UML & Langage de modélisation unifié \\
+\hline
+UI & Interface utilisateur \\
+\hline
+UX & Expérience utilisateur \\
+\hline
+\end{tabular}
+\end{center}
+
+% ==========================================================
+% INTRODUCTION GENERALE
+% ==========================================================
+\clearpage
+\pagenumbering{arabic}
+
+\chapter*{Introduction générale}
+\addcontentsline{toc}{chapter}{Introduction générale}
+
+L'agriculture tunisienne occupe une place importante dans l'économie nationale et dans l'équilibre social de plusieurs régions. Parmi ses filières les plus représentatives, l'oléiculture constitue un secteur stratégique lié à la production d'huile d'olive, à l'emploi agricole et à l'identité rurale du pays. Cependant, la gestion d'une exploitation oléicole reste confrontée à plusieurs défis, notamment le suivi de l'état sanitaire des arbres, l'identification des maladies, l'estimation de la période optimale de récolte et la prévision de la production.
+
+Dans la pratique, ces décisions reposent souvent sur l'observation visuelle, l'expérience de l'agriculteur ou l'intervention d'un spécialiste. Ces méthodes restent indispensables, mais elles peuvent devenir insuffisantes lorsque les symptômes sont difficiles à interpréter, lorsque les données sont nombreuses ou lorsque les conditions climatiques varient rapidement. Dans ce contexte, les outils numériques, la vision par ordinateur et l'intelligence artificielle peuvent constituer une aide à la décision, à condition d'être utilisés avec prudence et avec une validation agronomique adaptée.
+
+Le présent projet, intitulé \textit{AgroVision Olive AI}, vise à concevoir et développer une plateforme web intelligente dédiée à l'oléiculture tunisienne. Cette plateforme regroupe plusieurs modules complémentaires : la Configuration de la ferme, la Détection des maladies de l'olivier à partir d'images, la Période de récolte, le Modèle de production, le Tableau de bord, l'Historique des analyses et un Assistant intelligent destiné à accompagner l'utilisateur.
+
+La solution repose sur une architecture web moderne combinant une interface développée avec React et Vite, un serveur applicatif basé sur FastAPI, une base de données SQLite et des modules d'intelligence artificielle intégrant des techniques de vision par ordinateur. Elle exploite également des données météorologiques issues du service Open-Meteo afin d'enrichir l'analyse et de prendre en compte le contexte climatique de l'exploitation.
+
+Ce rapport est structuré en quatre chapitres principaux. Le premier chapitre présente le cadre général du projet, l'organisme d'accueil, la problématique, l'étude de l'existant, la solution proposée, le cycle de vie choisi et la planification. Le deuxième chapitre est consacré à l'analyse et à la spécification des besoins, aux diagrammes UML, à l'architecture générale et à l'environnement logiciel. Le troisième chapitre présente la première version du projet, regroupant la Configuration de la ferme et la Détection des maladies. Le quatrième chapitre présente la deuxième version, consacrée à la Période de récolte, au Tableau de bord, au Modèle de production et à l'Assistant intelligent. Enfin, une conclusion générale expose le bilan du travail réalisé ainsi que les perspectives d'amélioration.
+
+% ==========================================================
+% CHAPITRE 1
+% ==========================================================
+\chapter{Présentation du cadre du stage}
+
+\section{Introduction}
+
+Ce premier chapitre présente le cadre général dans lequel s'inscrit notre projet de fin d'études intitulé \textit{AgroVision Olive AI}. Nous présentons d'abord l'organisme d'accueil, puis le contexte du projet et la problématique étudiée. Ensuite, nous analysons quelques solutions existantes dans le domaine de l'agriculture numérique afin d'identifier leurs limites. Enfin, nous présentons la solution proposée, le cycle de vie retenu et la planification globale du projet.
+
+\section{Cadre général du projet}
+
+Le présent projet s'inscrit dans le cadre d'un projet de fin d'études en génie logiciel. Il a pour objectif de mettre en pratique des compétences liées au développement web, à la modélisation UML, à la gestion des données, à l'intelligence artificielle et à la vision par ordinateur.
+
+Le sujet porte sur le développement d'une plateforme intelligente d'aide à la décision pour l'oléiculture tunisienne. L'idée principale consiste à regrouper plusieurs services utiles à l'agriculteur dans une seule application : configuration de la ferme, analyse d'images, suivi météorologique, estimation de récolte, prévision de production, consultation d'un tableau de bord et assistance intelligente.
+
+\section{Présentation de l'organisme d'accueil}
+
+Notre projet a été réalisé au sein de l'Institut de l'Olivier de Sousse. L'Institut de l'Olivier est un organisme public tunisien spécialisé dans la recherche appliquée au secteur oléicole. Il intervient dans plusieurs domaines liés à l'amélioration de la production, à la protection phytosanitaire, à la gestion des ressources génétiques et à la valorisation des produits issus de l'oléiculture [1].
+
+\insertimage{prism-uploads/images (7).jpg}{width=0.28\textwidth}{Logo de l'Institut de l'Olivier}{fig:logo-institut-olivier}
+
+Ses activités couvrent plusieurs axes, notamment l'étude des variétés d'olivier, l'amélioration des pratiques culturales, l'analyse de la qualité de l'huile d'olive, le suivi des maladies et ravageurs, ainsi que la recherche de solutions adaptées aux contraintes climatiques et environnementales. L'institut contribue également à l'encadrement scientifique, à la diffusion des connaissances et à la collaboration avec des établissements universitaires et des partenaires professionnels.
+
+Le choix de cet organisme d'accueil est cohérent avec la finalité du projet. En effet, \textit{AgroVision Olive AI} porte sur le suivi intelligent des exploitations oléicoles, l'aide au diagnostic des maladies, l'estimation de la période de récolte et la prévision de production. Ces thématiques sont directement liées aux préoccupations du secteur oléicole tunisien.
+
+\section{Présentation du projet}
+
+\subsection{Problématique}
+
+La gestion d'une exploitation oléicole nécessite un suivi régulier de plusieurs facteurs : état sanitaire des arbres, conditions climatiques, maturité des fruits, historique de production et évolution globale du verger. Dans la pratique, ces tâches reposent souvent sur l'observation visuelle, l'expérience de l'agriculteur ou l'intervention d'un spécialiste.
+
+Cependant, cette approche peut présenter certaines limites. Le diagnostic des maladies peut être difficile lorsque les symptômes sont peu visibles ou confondus avec d'autres problèmes. Le choix de la période de récolte dépend de plusieurs paramètres tels que la maturité des olives, la saison, le cultivar et la météo. De plus, la prévision de production reste souvent approximative lorsqu'elle n'est pas appuyée par une analyse structurée des données disponibles.
+
+La problématique peut donc être formulée ainsi : comment concevoir une plateforme web intelligente, spécialisée dans l'oléiculture, capable d'aider l'agriculteur à suivre son exploitation, détecter certaines maladies, estimer la période de récolte, prévoir la production et recevoir des recommandations adaptées ?
+
+\subsection{Étude de l'existant}
+
+Dans le domaine de l'agriculture numérique, plusieurs solutions ont été développées afin d'aider les agriculteurs à suivre leurs cultures, diagnostiquer certaines maladies et accéder à des recommandations agricoles. Ces solutions peuvent être classées en deux grandes catégories : les plateformes de données agricoles et les applications intelligentes d'aide au diagnostic.
+
+En Tunisie, des plateformes telles que l'Observatoire National de l'Agriculture et Agridata permettent l'accès à des données, indicateurs et tableaux de bord liés au secteur agricole [2][3]. Ces outils jouent un rôle important dans la diffusion de l'information agricole. Toutefois, ils ne proposent pas une solution interactive spécialisée dans l'oléiculture, combinant diagnostic visuel, prévision de production, estimation de récolte et assistance intelligente.
+
+À l'échelle internationale, des applications comme Plantix et PlantVillage proposent des services d'aide au diagnostic agricole à partir d'images [4][5]. Ces applications utilisent des approches numériques pour identifier certains problèmes phytosanitaires et orienter l'utilisateur vers des recommandations.
+
+\subsubsection*{a. Étude de la plateforme Plantix}
+
+Plantix est une application agricole qui permet aux utilisateurs de soumettre des images de plantes afin d'obtenir une aide au diagnostic des maladies, ravageurs ou carences. Elle propose également des recommandations liées au traitement et à la gestion des problèmes détectés [4].
+
+\insertimage{prism-uploads/images.png}{width=0.45\textwidth}{Logo ou interface de la plateforme Plantix}{fig:plantix}
+
+Cette solution constitue un outil utile pour l'identification générale des problèmes phytosanitaires. Elle s'adresse à plusieurs types de cultures et vise principalement à assister les agriculteurs dans l'observation des symptômes visibles sur les plantes.
+
+\subsubsection*{b. Étude de la plateforme PlantVillage}
+
+PlantVillage est une plateforme d'assistance agricole qui propose des outils numériques pour accompagner les agriculteurs dans le diagnostic des maladies des cultures. Elle met l'accent sur l'accès à l'information agricole et l'aide à la décision, notamment dans des contextes où l'accompagnement technique peut être limité [5].
+
+\insertimage{prism-uploads/unnamed.png}{width=0.28\textwidth}{Logo ou interface de la plateforme PlantVillage}{fig:plantvillage}
+
+Cette solution se distingue par son orientation vers l'usage pratique sur le terrain et par sa volonté de rendre les outils de diagnostic plus accessibles aux agriculteurs.
+
+\subsection{Critique de l'existant}
+
+Le tableau suivant présente une comparaison entre Plantix, PlantVillage et les besoins fonctionnels visés par notre projet.
+
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{table}[H]
+\centering
+\caption{Comparaison entre les solutions existantes et les besoins du projet}
+\label{tab:comparaison-existant}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{5.2cm}|>{\centering\arraybackslash}p{1.8cm}|>{\centering\arraybackslash}p{2.7cm}|>{\raggedright\arraybackslash}p{3.2cm}|}
+\hline
+\textbf{Fonction} & \textbf{Plantix} & \textbf{PlantVillage} & \textbf{Besoin cible} \\
+\hline
+Diagnostic des maladies par image & \yesmark & \yesmark & \yesmark \\
+\hline
+Recommandations agricoles & \yesmark & \yesmark & \yesmark \\
+\hline
+Utilisation de l'intelligence artificielle & \yesmark & \yesmark & \yesmark \\
+\hline
+Spécialisation sur l'olivier & \nomark & \nomark & \yesmark \\
+\hline
+Adaptation au contexte tunisien & \nomark & \nomark & \yesmark \\
+\hline
+Estimation de la période optimale de récolte & \nomark & \nomark & \yesmark \\
+\hline
+Prévision de la production & \nomark & \nomark & \yesmark \\
+\hline
+Tableau de bord agricole intégré & \nomark & \nomark & \yesmark \\
+\hline
+Gestion de ferme et historique des analyses & Limité & Limité & \yesmark \\
+\hline
+Assistant dédié aux oléiculteurs & \nomark & \nomark & \yesmark \\
+\hline
+\end{tabular}
+\end{table}
+\normalsize
+
+À partir de cette comparaison, nous constatons que les solutions existantes apportent une aide intéressante dans le domaine du diagnostic agricole. Elles permettent notamment d'analyser des images et de fournir des recommandations générales. Toutefois, elles restent généralistes et ne prennent pas suffisamment en compte les caractéristiques propres à l'oléiculture tunisienne, telles que les cultivars locaux, les conditions climatiques régionales et les périodes de maturité.
+
+Ces solutions se concentrent principalement sur le diagnostic phytosanitaire. Elles ne couvrent pas d'autres besoins importants de l'agriculteur, comme l'estimation de la période de récolte, la prévision de production, la centralisation des données de la ferme ou le suivi historique des analyses.
+
+\subsection{Solution proposée}
+
+Afin de répondre aux limites identifiées, nous proposons de développer une plateforme intelligente nommée \textit{AgroVision Olive AI}. Cette plateforme est dédiée au domaine de l'oléiculture et vise à accompagner l'agriculteur dans le suivi de son exploitation à travers une interface web simple, centralisée et adaptée au contexte tunisien.
+
+\insertimage{prism-uploads/2418c840-e6ed-4e3b-8445-895d5acf6692.png}{height=3.2cm,keepaspectratio}{Logo de l'application AgroVision Olive AI}{fig:logo-agrovision}
+
+La solution proposée repose sur plusieurs modules complémentaires. Le module \textit{Configuration de la ferme} permet de saisir les informations principales de l'exploitation. Le module \textit{Détection des maladies} permet d'analyser des images de feuilles afin d'aider à l'identification de certaines maladies de l'olivier. Le module \textit{Période de récolte} estime le moment favorable de récolte en tenant compte de la maturité visuelle, de la saison, de la météo et du cultivar. Le \textit{Modèle de production} fournit une estimation de la production future à partir de facteurs agronomiques et climatiques. Le \textit{Tableau de bord} regroupe les informations essentielles sous forme de cartes, d'indicateurs et d'historique. Enfin, l'\textit{Assistant intelligent} permet de guider l'utilisateur et de lui proposer des recommandations pratiques.
+
+\insertimage{prism-uploads/Capture d'écran 2026-05-15 202450.png}{width=0.88\textwidth,height=5.5cm,keepaspectratio}{Aperçu général de la plateforme AgroVision Olive AI}{fig:apercu-general}
+
+L'objectif de cette solution n'est pas de remplacer l'expertise d'un agronome, mais de fournir un outil d'aide à la décision permettant d'améliorer le suivi quotidien de l'exploitation et de réduire l'incertitude dans certaines décisions agricoles.
+
+\section{Choix du cycle de vie du projet}
+
+Un projet logiciel peut être conduit selon plusieurs cycles de vie. Le choix dépend de la taille du projet, de la stabilité des besoins, du nombre de membres de l'équipe, du niveau de risque et de la nature des livrables. Dans le cadre de ce PFE, le projet a été réalisé individuellement avec des besoins globalement identifiés dès le départ, mais avec des ajustements progressifs liés à l'interface, aux modules d'analyse d'images et aux données disponibles.
+
+\begin{table}[H]
+\centering
+\caption{Comparaison entre quelques cycles de vie logiciels}
+\label{tab:comparaison-cycle-vie}
+\begin{tabular}{|p{3.2cm}|p{5.4cm}|p{5.4cm}|}
+\hline
+\textbf{Cycle} & \textbf{Avantages} & \textbf{Limites dans notre contexte} \\
+\hline
+Cycle en cascade & Simple à comprendre, adapté aux besoins stables, phases bien séparées. & Peu flexible lorsque des ajustements d'interface ou de modèle sont nécessaires. \\
+\hline
+Cycle en V & Relie chaque phase de conception à une phase de validation, favorise la traçabilité et les tests. & Peut devenir rigide si aucune itération n'est prévue. \\
+\hline
+Scrum / Agile & Adapté aux équipes, aux retours fréquents et aux produits évolutifs. & Scrum complet suppose des rôles et cérémonies d'équipe, ce qui ne correspond pas totalement à un projet individuel. \\
+\hline
+\end{tabular}
+\end{table}
+
+Le framework Scrum complet n'a donc pas été retenu comme méthodologie stricte. En effet, Scrum est généralement plus adapté aux projets réalisés par une équipe disposant de rôles distincts tels que Product Owner, Scrum Master et équipe de développement. Dans notre cas, ces rôles ne sont pas réellement séparés, puisque le projet a été réalisé par un seul étudiant.
+
+Nous avons donc adopté un \textbf{cycle en V avec itérations légères}. Ce choix permet de conserver une démarche structurée : analyse des besoins, conception, développement, tests et validation. Il permet aussi de revenir ponctuellement sur certaines décisions lors de la réalisation, notamment pour améliorer la carte, les réponses prudentes des modules d'IA ou l'ergonomie de l'interface.
+
+Dans ce rapport, le terme sprint désigne un lot fonctionnel de réalisation et non une application stricte du framework Scrum.
+
+\insertimage{prism-uploads/Capture d'écran 2026-05-15 204655.png}{width=0.95\textwidth,height=7cm,keepaspectratio}{Illustration des pratiques itératives ayant inspiré l'organisation du projet}{fig:pratiques-iteratives}
+
+\section{Planification du projet}
+
+La planification a été organisée en phases successives, conformément au cycle en V avec itérations légères. Chaque phase produit un livrable exploité dans la phase suivante.
+
+\begin{table}[H]
+\centering
+\caption{Planification générale du projet}
+\label{tab:planning-projet}
+\begin{tabular}{|p{1.2cm}|p{5.8cm}|p{6.4cm}|}
+\hline
+\textbf{N} & \textbf{Phase} & \textbf{Objectif} \\
+\hline
+1 & Analyse des besoins & Identifier les acteurs, les besoins fonctionnels et les contraintes du système. \\
+\hline
+2 & Conception & Préparer les diagrammes UML, l'architecture et la structure de données. \\
+\hline
+3 & Développement du lot 1 : Configuration de la ferme & Réaliser la gestion du profil de ferme et la localisation. \\
+\hline
+4 & Développement du lot 2 : Détection des maladies & Intégrer le pipeline d'analyse d'image et les réponses prudentes. \\
+\hline
+5 & Développement du lot 3 : Période de récolte & Combiner image, cultivar, saison et météo pour générer une recommandation. \\
+\hline
+6 & Développement du lot 4 : Tableau de bord, production et assistant & Centraliser les résultats, l'historique, les alertes et l'aide conversationnelle. \\
+\hline
+7 & Tests et validation & Vérifier les fonctionnalités, les cas limites et la cohérence des résultats. \\
+\hline
+8 & Rédaction du rapport & Documenter la démarche, la conception, la réalisation, les tests et les limites. \\
+\hline
+\end{tabular}
+\end{table}
+
+\insertimage{prism-uploads/gantt-agrovision.png}{width=0.95\textwidth,height=8cm,keepaspectratio}{Diagramme de Gantt du projet AgroVision Olive AI}{fig:gantt-agrovision}
+
+\section{Conclusion}
+
+Dans ce chapitre, nous avons présenté le cadre général du projet, l'organisme d'accueil, la problématique étudiée, l'étude de l'existant, la solution proposée, le cycle de vie choisi et la planification globale. Le chapitre suivant sera consacré à l'analyse et à la spécification des besoins fonctionnels et non fonctionnels de l'application.
+
+% ==========================================================
+% CHAPITRE 2
+% ==========================================================
+\chapter{Analyse et spécification des besoins}
+
+\section{Introduction}
+
+Ce chapitre est consacré à l'analyse et à la spécification des besoins de l'application \textit{AgroVision Olive AI}. Nous commençons par identifier les acteurs qui interagissent avec le système. Ensuite, nous présentons les besoins fonctionnels et non fonctionnels. Nous décrivons également les diagrammes UML, le backlog produit, les lots fonctionnels de réalisation, l'architecture générale de la solution et l'environnement logiciel utilisé.
+
+\section{Identification des acteurs}
+
+Un acteur représente une entité externe qui interagit avec le système. Dans le cadre de notre application, les acteurs sont liés à l'utilisation agricole de la plateforme ainsi qu'aux services externes nécessaires à son fonctionnement.
+
+\begin{table}[H]
+\centering
+\caption{Identification des acteurs du système}
+\label{tab:acteurs-systeme}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{4cm}|>{\raggedright\arraybackslash}p{10cm}|}
+\hline
+\textbf{Acteur} & \textbf{Description} \\
+\hline
+Agriculteur & Acteur principal. Il configure sa ferme, lance les analyses, consulte le tableau de bord, visualise les résultats et exploite les recommandations proposées. \\
+\hline
+Agronome & Acteur consultatif pouvant interpréter certains résultats et valider les recommandations dans une évolution future du système. \\
+\hline
+Administrateur & Acteur chargé du suivi technique, de la maintenance et de l'évolution de la plateforme lorsque le système est déployé. \\
+\hline
+Service météo externe Open-Meteo & Service externe fournissant les données météorologiques nécessaires au Tableau de bord, à la Période de récolte et au Modèle de production. \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Besoins fonctionnels}
+
+Les besoins fonctionnels représentent les services que l'application doit fournir à l'utilisateur. Ils sont organisés selon les modules principaux du système.
+
+\subsection{Configuration de la ferme}
+\begin{itemize}
+    \item Permettre la création et la modification d'un profil de ferme.
+    \item Enregistrer la localisation géographique de l'exploitation.
+    \item Définir le cultivar principal, le nombre d'arbres, l'âge des arbres et le mode d'irrigation.
+    \item Gérer les groupes d'arbres et les notes associées.
+    \item Sauvegarder les données afin de les utiliser dans les autres modules.
+\end{itemize}
+
+\subsection{Détection des maladies}
+\begin{itemize}
+    \item Permettre le téléversement d'une image de l'olivier.
+    \item Vérifier la qualité de l'image avant l'analyse.
+    \item Identifier la partie végétale visible dans l'image.
+    \item Analyser les feuilles lorsque l'image est exploitable.
+    \item Afficher le diagnostic, le niveau de confiance et une recommandation.
+    \item Gérer les résultats incertains ou les images non exploitables.
+\end{itemize}
+
+\subsection{Période de récolte}
+\begin{itemize}
+    \item Permettre le téléversement d'une image liée à la maturité des olives.
+    \item Analyser visuellement le stade de maturité.
+    \item Exploiter la saison, le cultivar, la localisation et les données météo.
+    \item Déterminer si la récolte est prématurée, proche, optimale, tardive ou incertaine.
+    \item Fournir une recommandation claire concernant la période de récolte.
+\end{itemize}
+
+\subsection{Modèle de production}
+\begin{itemize}
+    \item Exploiter l'historique de production lorsqu'il est disponible.
+    \item Prendre en compte les facteurs climatiques et agronomiques.
+    \item Calculer une estimation de production sous forme de plage.
+    \item Présenter les facteurs qui influencent la prévision.
+    \item Réduire le niveau de confiance lorsque les données sont incomplètes.
+\end{itemize}
+
+\subsection{Tableau de bord, Historique et Assistant intelligent}
+\begin{itemize}
+    \item Afficher les informations principales de la ferme.
+    \item Afficher les indicateurs météo, maladie, maturité et production.
+    \item Consulter l'Historique des analyses.
+    \item Afficher les alertes et recommandations importantes.
+    \item Permettre à l'utilisateur de poser une question liée à l'exploitation.
+    \item Fournir une réponse ou une orientation simple lorsque le contexte est suffisant.
+\end{itemize}
+
+\section{Besoins non fonctionnels}
+
+\begin{table}[H]
+\centering
+\caption{Besoins non fonctionnels}
+\label{tab:besoins-non-fonctionnels}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{4cm}|>{\raggedright\arraybackslash}p{10cm}|}
+\hline
+\textbf{Besoin} & \textbf{Description} \\
+\hline
+Ergonomie & L'interface doit être claire, moderne et facile à utiliser, même pour un utilisateur non spécialiste en informatique. \\
+\hline
+Lisibilité & Les résultats doivent être présentés avec des libellés compréhensibles, des niveaux de confiance et des recommandations simples. \\
+\hline
+Fiabilité & Le système doit éviter les prédictions trop confiantes lorsque les données sont insuffisantes ou ambiguës. \\
+\hline
+Robustesse & L'application doit gérer les images invalides, floues, trop sombres ou mal cadrées. \\
+\hline
+Performance & Les temps de réponse doivent rester raisonnables lors de la navigation et de l'exécution des analyses. \\
+\hline
+Maintenabilité & Le code doit être organisé de manière modulaire afin de faciliter les améliorations futures. \\
+\hline
+Évolutivité & Le système doit permettre l'ajout de nouveaux modèles, de nouvelles maladies et de nouvelles fonctionnalités. \\
+\hline
+Sécurité & Les entrées utilisateur, les fichiers téléversés et les échanges API doivent être validés et contrôlés. \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Diagramme de cas d'utilisation global}
+
+Le diagramme de cas d'utilisation global représente les interactions entre l'agriculteur et les principales fonctionnalités du système. Le service météo externe intervient uniquement comme service secondaire pour fournir les données climatiques exploitées par les modules concernés.
+
+\insertimage{prism-uploads/use case.png}{width=0.98\textwidth,height=14cm,keepaspectratio}{Diagramme de cas d'utilisation global}{fig:usecase-global}
+
+Cette représentation met en évidence les cas d'utilisation principaux : Configurer la ferme, Lancer une détection de maladie, Estimer la période de récolte, Consulter la prévision de production, Consulter le Tableau de bord, Consulter l'Historique, Consulter les alertes et recommandations et Interagir avec l'Assistant intelligent. Les relations obligatoires doivent être modélisées par \textit{include}, tandis que les comportements optionnels ou exceptionnels, comme un résultat incertain, relèvent de \textit{extend}.
+
+\section{Description textuelle des cas d'utilisation principaux}
+
+\subsection{Cas d'utilisation : Configurer la ferme}
+
+\begin{table}[H]
+\centering
+\caption{Description textuelle du cas d'utilisation : Configurer la ferme}
+\label{tab:cu-configurer-ferme}
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Élément} & \textbf{Description} \\
+\hline
+Acteur principal & Agriculteur \\
+\hline
+Objectif & Créer ou modifier le profil de l'exploitation agricole. \\
+\hline
+Précondition & L'utilisateur accède à la page de configuration de la ferme. \\
+\hline
+Scénario principal & L'utilisateur saisit le nom de la ferme, la localisation, le cultivar, le nombre d'arbres et les informations relatives au verger. Le système vérifie les données puis enregistre le profil. \\
+\hline
+Postcondition & Les informations de la ferme sont sauvegardées et utilisées par les autres modules. \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Cas d'utilisation : Lancer une détection de maladie}
+
+\begin{table}[H]
+\centering
+\caption{Description textuelle du cas d'utilisation : Lancer une détection de maladie}
+\label{tab:cu-detection-maladie}
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Élément} & \textbf{Description} \\
+\hline
+Acteur principal & Agriculteur \\
+\hline
+Objectif & Analyser une image de l'olivier afin d'obtenir une aide au diagnostic. \\
+\hline
+Précondition & L'utilisateur dispose d'une image à analyser. \\
+\hline
+Scénario principal & L'utilisateur téléverse une image. Le système vérifie sa qualité, identifie la partie végétale, applique le traitement adapté et affiche le résultat avec un niveau de confiance. \\
+\hline
+Postcondition & Le résultat est affiché et peut être conservé dans l'Historique. \\
+\hline
+Exception & Si l'image est floue, sombre, non supportée ou ambiguë, le système retourne un résultat incertain et demande une image de meilleure qualité. \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Cas d'utilisation : Estimer la période de récolte}
+
+\begin{table}[H]
+\centering
+\caption{Description textuelle du cas d'utilisation : Estimer la période de récolte}
+\label{tab:cu-recolte}
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Élément} & \textbf{Description} \\
+\hline
+Acteur principal & Agriculteur \\
+\hline
+Acteur secondaire & Service météo externe Open-Meteo \\
+\hline
+Objectif & Estimer si la récolte est prématurée, proche, optimale, tardive ou incertaine. \\
+\hline
+Précondition & La ferme est configurée et l'utilisateur fournit une image liée à la maturité. \\
+\hline
+Scénario principal & Le système analyse l'image, récupère les informations de ferme et les données météo, puis génère une recommandation de récolte. \\
+\hline
+Postcondition & Une recommandation est affichée à l'utilisateur. \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Backlog produit et lots fonctionnels}
+
+Le backlog produit regroupe les fonctionnalités principales à réaliser dans l'application. Les lots fonctionnels sont conservés dans le rapport sous le nom de sprints pour faciliter la lecture, mais ils ne correspondent pas à une application stricte de Scrum.
+
+\begin{table}[H]
+\centering
+\caption{Backlog produit}
+\label{tab:backlog-produit}
+\begin{tabular}{|p{1.4cm}|p{4cm}|p{6.2cm}|p{2cm}|}
+\hline
+\textbf{ID} & \textbf{Fonctionnalité} & \textbf{Histoire utilisateur} & \textbf{Priorité} \\
+\hline
+1 & Configuration de la ferme & En tant qu'agriculteur, je veux configurer ma ferme afin d'exploiter mes données dans les autres modules. & Élevée \\
+\hline
+2 & Localisation & En tant qu'agriculteur, je veux sélectionner la localisation de ma ferme afin d'obtenir des données météo adaptées. & Élevée \\
+\hline
+3 & Détection des maladies & En tant qu'agriculteur, je veux analyser une image afin d'obtenir une aide au diagnostic. & Élevée \\
+\hline
+4 & Période de récolte & En tant qu'agriculteur, je veux estimer la période de récolte afin de mieux planifier mes opérations. & Élevée \\
+\hline
+5 & Modèle de production & En tant qu'agriculteur, je veux obtenir une prévision de production afin d'anticiper la saison. & Moyenne \\
+\hline
+6 & Tableau de bord & En tant qu'agriculteur, je veux consulter un tableau de bord afin de suivre l'état global de mon exploitation. & Élevée \\
+\hline
+7 & Historique & En tant qu'agriculteur, je veux consulter les anciennes analyses afin de suivre l'évolution de ma ferme. & Moyenne \\
+\hline
+8 & Assistant intelligent & En tant qu'agriculteur, je veux poser des questions afin d'obtenir des conseils adaptés. & Moyenne \\
+\hline
+\end{tabular}
+\end{table}
+
+\insertimage{prism-uploads/Capture d'écran 2026-05-15 215741.png}{width=0.95\textwidth,height=6cm,keepaspectratio}{Découpage des lots fonctionnels du projet}{fig:decoupage-lots}
+
+\begin{table}[H]
+\centering
+\caption{Planification des lots fonctionnels}
+\label{tab:planification-lots}
+\begin{tabular}{|p{2cm}|p{5cm}|p{7cm}|}
+\hline
+\textbf{Lot} & \textbf{Intitulé} & \textbf{Objectif principal} \\
+\hline
+Sprint 1 & Structure du projet et Configuration de la ferme & Mettre en place la base technique du projet et permettre la configuration de la ferme. \\
+\hline
+Sprint 2 & Détection des maladies & Développer le pipeline de diagnostic des maladies à partir d'images. \\
+\hline
+Sprint 3 & Période de récolte et météo & Estimer la période de récolte et intégrer les données météorologiques. \\
+\hline
+Sprint 4 & Tableau de bord, production et assistant & Centraliser les résultats, prévoir la production et ajouter l'assistant utilisateur. \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Architecture générale de l'application}
+
+\subsection{Architecture logique}
+
+L'application suit une architecture en couches. La couche de présentation correspond à l'interface React/Vite. La couche applicative correspond au serveur FastAPI, qui orchestre les services métier. La couche de données repose sur SQLite. Les services externes, notamment Open-Meteo, complètent l'application lorsque les modules nécessitent des données climatiques.
+
+\insertimage{prism-uploads/Capture d'écran 2026-05-15 224708_2.png}{width=0.95\textwidth,height=7cm,keepaspectratio}{Architecture logique de l'application AgroVision Olive AI}{fig:architecture-logique}
+
+\subsection{Architecture physique}
+
+L'architecture physique est organisée autour du navigateur de l'utilisateur, du serveur applicatif FastAPI, de la base SQLite, des modèles d'intelligence artificielle et du service météo externe. Le navigateur communique avec l'API par des requêtes HTTP. Le backend traite les requêtes, interroge la base de données, exécute les modèles lorsque nécessaire et retourne une réponse structurée.
+
+\insertimage{prism-uploads/Capture d'écran 2026-05-15 233952.png}{width=0.95\textwidth,height=7cm,keepaspectratio}{Architecture physique de l'application}{fig:architecture-physique}
+
+\section{Environnement logiciel}
+
+\begin{table}[H]
+\centering
+\caption{Technologies utilisées dans le projet}
+\label{tab:technologies}
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Technologie} & \textbf{Rôle dans le projet} \\
+\hline
+React & Développement de l'interface utilisateur. \\
+\hline
+Vite & Environnement de développement frontend rapide. \\
+\hline
+FastAPI & Développement de l'API backend. \\
+\hline
+SQLite & Stockage local des profils de ferme, scans, alertes, notes et historiques. \\
+\hline
+PyTorch & Intégration des modèles de vision par ordinateur. \\
+\hline
+torchvision & Préparation des images et exploitation des architectures de vision. \\
+\hline
+EfficientNet-B0 & Architecture utilisée pour la classification des maladies foliaires. \\
+\hline
+Open-Meteo & Récupération des données météorologiques. \\
+\hline
+Leaflet / React Leaflet & Affichage de cartes et gestion de la localisation. \\
+\hline
+Recharts & Affichage des graphiques et indicateurs. \\
+\hline
+Framer Motion & Animations légères de l'interface. \\
+\hline
+Git / GitHub & Gestion de versions et suivi du code source. \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Sécurité, déploiement et scalabilité}
+
+La sécurité et la scalabilité constituent des éléments importants même dans un prototype de PFE. L'application sépare le frontend et le backend afin de limiter le couplage entre l'interface et les traitements métier. Les échanges avec l'API sont structurés en JSON ou en formulaires multipart lorsque des images sont téléversées.
+
+Le backend doit valider les entrées utilisateur, notamment les champs de formulaire et les fichiers importés. Pour les images, le système vérifie le format, la lisibilité du fichier, la qualité visuelle et le caractère exploitable de l'image avant de produire un résultat. Cette étape est essentielle pour éviter les diagnostics non fiables et limiter les erreurs liées aux images floues, sombres ou non supportées.
+
+La configuration CORS permet de contrôler les origines autorisées à communiquer avec l'API. Dans une version de production, il serait nécessaire d'ajouter une authentification, une gestion des rôles, un chiffrement renforcé des échanges, une politique de stockage des fichiers et une journalisation plus complète.
+
+SQLite est adapté à une version locale ou à un prototype, car il est simple à installer et suffisant pour un volume réduit de données. Toutefois, pour une utilisation multi-utilisateurs ou un déploiement cloud, une migration vers PostgreSQL serait préférable. Cette évolution faciliterait la scalabilité, la sauvegarde, la gestion des accès concurrents et l'exploitation d'un tableau de bord expert.
+
+\section{Conclusion}
+
+Dans ce chapitre, nous avons identifié les acteurs et les besoins de l'application. Nous avons également présenté les principaux cas d'utilisation, le backlog produit, le découpage en lots fonctionnels, l'architecture générale, l'environnement logiciel ainsi que les aspects de sécurité et de scalabilité. Le chapitre suivant présente la première version du projet.
+
+% ==========================================================
+% CHAPITRE 3
+% ==========================================================
+\chapter{Version 1 : configuration et détection des maladies}
+
+\section{Introduction}
+
+Ce chapitre présente la première version du projet. Elle regroupe deux lots fonctionnels principaux. Le premier concerne la mise en place de la structure du projet et le développement du module de Configuration de la ferme. Le deuxième est consacré au module de Détection des maladies, qui permet l'analyse d'images pour l'aide au diagnostic de l'olivier.
+
+Les sprints présentés dans ce rapport correspondent à des lots fonctionnels de réalisation. Ils ne représentent pas une application complète du framework Scrum.
+
+\section{Sprint 1 : Structure du projet et Configuration de la ferme}
+
+\subsection{Objectif du sprint}
+
+L'objectif du premier lot fonctionnel est de mettre en place les fondations techniques de l'application et de développer le module de Configuration de la ferme. Ce module permet à l'utilisateur de créer un profil de ferme, d'indiquer sa localisation, de préciser le cultivar et de renseigner les informations principales du verger.
+
+\subsection{Backlog du sprint}
+
+\begin{table}[H]
+\centering
+\caption{Backlog du Sprint 1}
+\label{tab:backlog-sprint1}
+\begin{tabular}{|p{1.4cm}|p{4.5cm}|p{6.6cm}|p{2cm}|}
+\hline
+\textbf{ID} & \textbf{Fonctionnalité} & \textbf{Histoire utilisateur} & \textbf{Priorité} \\
+\hline
+S1-01 & Structure du projet & En tant que développeur, je veux organiser l'interface et le serveur afin de faciliter le développement. & Élevée \\
+\hline
+S1-02 & API principale & En tant que système, je veux disposer de routes backend afin de communiquer avec l'interface. & Élevée \\
+\hline
+S1-03 & Configuration de la ferme & En tant qu'agriculteur, je veux configurer ma ferme afin d'utiliser les autres modules. & Élevée \\
+\hline
+S1-04 & Localisation & En tant qu'agriculteur, je veux choisir la position de ma ferme afin d'obtenir une météo adaptée. & Élevée \\
+\hline
+S1-05 & Groupes d'arbres & En tant qu'agriculteur, je veux gérer les groupes d'arbres afin de mieux décrire mon verger. & Moyenne \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Analyse du sprint}
+
+La figure suivante présente le diagramme de cas d'utilisation du premier lot fonctionnel.
+
+\insertimage{prism-uploads/di.png}{width=0.95\textwidth,height=9cm,keepaspectratio}{Diagramme de cas d'utilisation du Sprint 1 : Configuration de la ferme}{fig:usecase-sprint1}
+
+Ce diagramme illustre les interactions entre l'agriculteur et le module de Configuration de la ferme. Le cas principal \textit{Configurer la ferme} inclut la saisie des informations, la sélection de la localisation, la validation du formulaire et l'enregistrement des données. Les options \textit{Choisir une ville} et \textit{Utiliser ma position actuelle} étendent le cas de sélection de la localisation, car elles représentent des variantes possibles de saisie.
+
+\subsubsection*{Scénario : Configurer la ferme}
+
+\begin{enumerate}
+    \item L'utilisateur accède à l'interface de Configuration de la ferme.
+    \item Le frontend récupère le profil de ferme existant s'il est disponible.
+    \item L'utilisateur saisit le nom de la ferme, la région, le cultivar et les informations du verger.
+    \item Il sélectionne la localisation sur la carte, choisit une ville ou utilise sa position actuelle.
+    \item Le système valide les champs principaux.
+    \item Le backend enregistre les données dans la base SQLite.
+    \item L'interface affiche un message de succès.
+\end{enumerate}
+
+\subsection{Conception du sprint}
+
+La conception du premier lot repose sur les classes liées au profil de ferme, aux groupes d'arbres et aux notes.
+
+\insertimage{prism-uploads/classe sp1.png}{width=0.85\textwidth,height=13cm,keepaspectratio}{Diagramme de classes du Sprint 1}{fig:classes-sprint1}
+
+La classe \texttt{FarmProfile} représente l'entité centrale du module. Elle possède une relation de composition avec \texttt{TreeGroup}, car une ferme peut contenir plusieurs groupes d'arbres. Elle peut également être associée à plusieurs notes via \texttt{FarmNote}. Cette organisation permet de séparer les informations générales de la ferme, les caractéristiques des groupes d'arbres et les remarques de suivi.
+
+\insertimage{prism-uploads/seq sp1.png}{width=0.95\textwidth,height=13cm,keepaspectratio}{Diagramme de séquence de configuration de la ferme}{fig:sequence-sprint1}
+
+Le diagramme de séquence met en évidence la séparation entre l'interface web React/Vite, l'API FastAPI, la carte interactive React Leaflet et la base SQLite. Cette séparation facilite la maintenance et permet aux autres modules de réutiliser les données de ferme.
+
+\subsection{Réalisation du sprint}
+
+La réalisation du premier sprint a permis de mettre en place les bases techniques de l'application et de développer le module \textit{Configuration de la ferme}. Ce module permet à l'utilisateur de saisir les informations essentielles de son exploitation, notamment le nom de la ferme, la région, le cultivar principal, le nombre d'arbres, l'âge des arbres et le mode d'irrigation.
+
+\insertimage{prism-uploads/Capture d'écran 2026-05-16 124727.png}{width=0.95\textwidth,height=7cm,keepaspectratio}{Interface de Configuration de la ferme}{fig:interface-configuration-ferme}
+
+La localisation de la ferme est définie à travers une carte interactive. L'utilisateur peut placer un marqueur sur la carte, utiliser sa position actuelle ou récupérer une position déjà enregistrée. Cette localisation est ensuite utilisée par les modules dépendant du contexte météorologique.
+
+\insertimage{prism-uploads/Capture d'écran 2026-05-16 124943.png}{width=0.95\textwidth,height=7cm,keepaspectratio}{Interface de sélection de la localisation de la ferme}{fig:interface-localisation-ferme}
+
+\subsection{Résultat du sprint}
+
+À la fin de ce sprint, l'application dispose d'une structure technique fonctionnelle et d'un module permettant à l'utilisateur de configurer les informations essentielles de sa ferme. Ces données sont exploitées par les autres modules, notamment la météo, la Période de récolte et le Modèle de production.
+
+\section{Sprint 2 : Détection des maladies}
+
+\subsection{Objectif du sprint}
+
+L'objectif du deuxième lot fonctionnel est de développer le module de Détection des maladies. Ce module permet à l'utilisateur de téléverser une image de l'olivier afin d'obtenir une aide au diagnostic, principalement sur les feuilles.
+
+\subsection{Backlog du sprint}
+
+\begin{table}[H]
+\centering
+\caption{Backlog du Sprint 2}
+\label{tab:backlog-sprint2}
+\begin{tabular}{|p{1.4cm}|p{4.5cm}|p{6.6cm}|p{2cm}|}
+\hline
+\textbf{ID} & \textbf{Fonctionnalité} & \textbf{Histoire utilisateur} & \textbf{Priorité} \\
+\hline
+S2-01 & Téléversement d'image & En tant qu'agriculteur, je veux importer une image afin de lancer une analyse. & Élevée \\
+\hline
+S2-02 & Contrôle qualité & En tant que système, je veux vérifier la qualité de l'image afin d'éviter les résultats non fiables. & Élevée \\
+\hline
+S2-03 & Routage de la partie végétale & En tant que système, je veux identifier la partie de la plante afin d'appliquer le bon traitement. & Élevée \\
+\hline
+S2-04 & Classification des feuilles & En tant que système, je veux classifier une feuille afin d'identifier une maladie éventuelle. & Élevée \\
+\hline
+S2-05 & Résultat et recommandation & En tant qu'agriculteur, je veux recevoir un diagnostic lisible et une recommandation. & Élevée \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Analyse du sprint}
+
+\insertimage{prism-uploads/use case sp2.png}{width=0.95\textwidth,height=8cm,keepaspectratio}{Diagramme de cas d'utilisation du Sprint 2 : Détection des maladies}{fig:usecase-sprint2}
+
+Le cas d'utilisation principal \textit{Lancer une détection de maladie} inclut le téléversement d'image, le contrôle qualité, l'identification de la partie végétale, l'analyse foliaire et l'affichage du résultat. Le cas \textit{Retourner un résultat incertain} représente un comportement d'extension déclenché lorsque l'image est floue, non supportée ou lorsque le modèle n'atteint pas un niveau de confiance suffisant.
+
+\subsubsection*{Scénario : Lancer une détection de maladie}
+
+\begin{enumerate}
+    \item L'utilisateur accède au module de Détection des maladies.
+    \item Il importe une image de feuille, fruit ou branche.
+    \item Le système vérifie automatiquement la qualité de l'image.
+    \item Le système identifie la partie végétale visible.
+    \item Le modèle de diagnostic est appliqué lorsque l'image est exploitable.
+    \item Le résultat, la confiance et la recommandation sont affichés.
+    \item Un résultat incertain est retourné si les données sont insuffisantes.
+\end{enumerate}
+
+\subsection{Conception du sprint}
+
+La conception du module repose sur un pipeline composé de plusieurs étapes : téléversement d'image, contrôle qualité, routage de la partie végétale, classification foliaire, seuil de confiance et règles expertes.
+
+\insertimage{prism-uploads/pip.png}{width=0.98\textwidth,height=5.5cm,keepaspectratio}{Pipeline du module de Détection des maladies}{fig:pipeline-maladies}
+
+Le pipeline prévoit plusieurs chemins d'exception. Une image floue ou trop sombre conduit à une demande d'image plus claire. Une partie végétale non supportée conduit à un résultat incertain. Une confiance faible empêche le système d'annoncer une maladie avec certitude.
+
+\insertimage{prism-uploads/seq sp2.png}{width=0.95\textwidth,height=13cm,keepaspectratio}{Diagramme de séquence du module de Détection des maladies}{fig:sequence-sprint2}
+
+Le diagramme de séquence met en évidence le flux technique du module : l'interface envoie l'image à l'endpoint \texttt{POST /disease-scan-expert}, le backend vérifie le format, applique le contrôle qualité, appelle le routeur de partie végétale, exécute le modèle foliaire EfficientNet-B0 lorsque l'image est supportée, applique les seuils et retourne un diagnostic ou un résultat incertain.
+
+\subsection{Approche scientifique du module de Détection des maladies}
+
+Le module de Détection des maladies s'appuie sur la vision par ordinateur. Son objectif est d'identifier certaines maladies foliaires de l'olivier à partir d'une image téléversée par l'utilisateur. L'approche retenue repose sur une architecture \textit{EfficientNet-B0}, connue pour proposer un bon compromis entre performance et coût de calcul [8].
+
+Les classes foliaires actuellement supportées sont :
+\begin{itemize}
+    \item \texttt{healthy\_leaf} : feuille saine ;
+    \item \texttt{olive\_peacock\_spot} : oeil de paon ;
+    \item \texttt{aculus\_olearius} : symptômes liés à l'acariose de l'olivier.
+\end{itemize}
+
+\begin{table}[H]
+\centering
+\caption{Composition du jeu de données foliaire utilisé}
+\label{tab:dataset-maladies}
+\begin{tabular}{|p{5cm}|p{4cm}|p{5cm}|}
+\hline
+\textbf{Classe} & \textbf{Nombre d'images recensé} & \textbf{Remarque} \\
+\hline
+\texttt{healthy\_leaf} & 19 & Classe de feuilles saines. \\
+\hline
+\texttt{olive\_peacock\_spot} & 37 & Classe de feuilles atteintes d'oeil de paon. \\
+\hline
+\texttt{aculus\_olearius} & 43 & Classe de feuilles présentant des symptômes d'acariose. \\
+\hline
+\texttt{uncertain\_leaf} & 3 & Images ambiguës utilisées pour renforcer la prudence. \\
+\hline
+\end{tabular}
+\end{table}
+
+Le jeu de données principal est organisé dans le dossier \texttt{data/disease\_training\_data/final\_curated/leaf}. Les images proviennent d'un processus de collecte et de curation interne au projet, complété par des sources publiques lorsque cela était possible. Les chiffres ci-dessus correspondent aux images recensées dans la version locale du projet. Ils restent limités, ce qui justifie l'utilisation de seuils de confiance prudents et l'ajout d'une perspective d'enrichissement du jeu de données.
+
+\begin{table}[H]
+\centering
+\caption{Découpage du jeu de données}
+\label{tab:split-dataset}
+\begin{tabular}{|p{4cm}|p{4cm}|p{6cm}|}
+\hline
+\textbf{Sous-ensemble} & \textbf{Proportion} & \textbf{Utilisation} \\
+\hline
+Entraînement & 80\% & Ajustement des paramètres du modèle. \\
+\hline
+Validation & 20\% & Suivi de la performance et sélection du meilleur modèle. \\
+\hline
+Test indépendant & \textbf{À compléter} & À constituer avec des images terrain non vues pendant l'entraînement. \\
+\hline
+\end{tabular}
+\end{table}
+
+Le prétraitement applique un redimensionnement en $224 \times 224$, une conversion en tenseur et une normalisation selon les moyennes et écarts types utilisés par les modèles préentraînés ImageNet. Pendant l'entraînement, des augmentations simples sont appliquées, notamment le retournement horizontal et une rotation légère, afin d'améliorer la robustesse du modèle face aux variations de prise de vue.
+
+\begin{table}[H]
+\centering
+\caption{Paramètres d'entraînement du modèle foliaire}
+\label{tab:parametres-entrainement}
+\begin{tabular}{|p{4cm}|p{9cm}|}
+\hline
+\textbf{Paramètre} & \textbf{Valeur} \\
+\hline
+Architecture & EfficientNet-B0 préentraîné \\
+\hline
+Taille d'image & $224 \times 224$ \\
+\hline
+Époques & 10 à 12 selon les essais \\
+\hline
+Batch size & 16 \\
+\hline
+Optimiseur & Adam \\
+\hline
+Learning rate & $3 \times 10^{-4}$ pour le modèle foliaire \\
+\hline
+Fonction de perte & Cross Entropy Loss \\
+\hline
+Augmentation & Retournement horizontal, rotation légère, normalisation \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Métriques de validation du modèle foliaire}
+\label{tab:metriques-maladies}
+\begin{tabular}{|p{5cm}|p{5cm}|}
+\hline
+\textbf{Métrique} & \textbf{Valeur observée} \\
+\hline
+Accuracy & 0.977982 \\
+\hline
+Precision & 0.977992 \\
+\hline
+Recall & 0.977982 \\
+\hline
+F1-score & 0.977982 \\
+\hline
+\end{tabular}
+\end{table}
+
+Ces valeurs doivent être interprétées avec prudence, car le jeu de données reste réduit. Elles indiquent un bon comportement sur l'ensemble de validation local, mais elles ne remplacent pas une évaluation terrain sur des images tunisiennes diversifiées.
+
+\insertimage{prism-uploads/confusion-matrix-disease.png}{width=0.78\textwidth,height=8cm,keepaspectratio}{Matrice de confusion du modèle de Détection des maladies}{fig:confusion-matrix-disease}
+
+La logique finale du module ne repose pas uniquement sur la classe prédite. Le système applique également un seuil de confiance, un contrôle qualité de l'image et des règles expertes. Ainsi, lorsque l'image est mauvaise, que la partie végétale n'est pas supportée ou que la confiance est insuffisante, le système retourne un résultat incertain au lieu d'annoncer une maladie de manière excessive.
+
+\subsection{Réalisation du sprint}
+
+L'interface du module de Détection des maladies permet à l'utilisateur d'importer une image de l'olivier afin d'obtenir une aide au diagnostic. Le serveur reçoit l'image, applique les contrôles nécessaires, exécute le pipeline de traitement et retourne un résultat structuré à l'interface.
+
+Le module utilise l'endpoint principal suivant :
+
+\begin{verbatim}
+POST /disease-scan-expert
+\end{verbatim}
+
+\insertimage{prism-uploads/Capture d'écran 2026-05-17 005357.png}{width=0.95\textwidth,height=8cm,keepaspectratio}{Interface de téléversement du module de Détection des maladies}{fig:interface-televersement-maladies}
+
+\insertimage{prism-uploads/Capture d'écran 2026-05-17 005531.png}{width=0.95\textwidth,height=7cm,keepaspectratio}{Affichage du résultat du module de Détection des maladies}{fig:resultat-detection-maladies}
+
+La figure ci-dessus présente un exemple de résultat obtenu après l'analyse d'une feuille d'olivier. Le résultat constitue une aide à la décision pour l'agriculteur. Il doit être interprété avec prudence, notamment lorsque la qualité de l'image, la diversité du jeu de données ou le niveau de confiance ne permettent pas une conclusion certaine.
+
+\subsection{Résultat du sprint}
+
+À la fin de ce sprint, le module de Détection des maladies permet d'analyser des images de feuilles, d'afficher un diagnostic, un niveau de confiance et une recommandation. Une logique prudente est appliquée lorsque l'image est de mauvaise qualité ou lorsque le résultat est incertain.
+
+\section{Conclusion}
+
+Dans cette première version, nous avons réalisé les bases techniques du projet ainsi que les deux premiers modules fonctionnels : la Configuration de la ferme et la Détection des maladies. Ces éléments constituent le socle de la plateforme et préparent l'intégration des modules de récolte, de production et de tableau de bord.
+
+% ==========================================================
+% CHAPITRE 4
+% ==========================================================
+\chapter{Version 2 : récolte, production et tableau de bord}
+
+\section{Introduction}
+
+Ce chapitre présente la deuxième version du projet \textit{AgroVision Olive AI}. Elle regroupe le troisième et le quatrième lot fonctionnel. Le Sprint 3 concerne le module Période de récolte et l'intégration des données météorologiques. Le Sprint 4 est consacré au Tableau de bord, au Modèle de production et à l'Assistant intelligent.
+
+\section{Sprint 3 : Période de récolte et intégration météo}
+
+\subsection{Objectif du sprint}
+
+L'objectif du troisième lot fonctionnel est de développer le module Période de récolte. Ce module permet d'estimer le moment favorable de récolte en combinant l'image, la maturité visuelle, la saison, le cultivar, la localisation et la météo.
+
+\subsection{Backlog du sprint}
+
+\begin{table}[H]
+\centering
+\caption{Backlog du Sprint 3}
+\label{tab:backlog-sprint3}
+\begin{tabular}{|p{1.4cm}|p{4.5cm}|p{6.6cm}|p{2cm}|}
+\hline
+\textbf{ID} & \textbf{Fonctionnalité} & \textbf{Histoire utilisateur} & \textbf{Priorité} \\
+\hline
+S3-01 & Interface de récolte & En tant qu'agriculteur, je veux importer une image afin d'estimer la maturité. & Élevée \\
+\hline
+S3-02 & Analyse de maturité & En tant que système, je veux analyser la maturité visuelle afin de proposer une décision. & Élevée \\
+\hline
+S3-03 & Météo & En tant que système, je veux récupérer les données météo afin d'améliorer l'analyse. & Élevée \\
+\hline
+S3-04 & Recommandation de récolte & En tant qu'agriculteur, je veux obtenir une recommandation claire sur la période de récolte. & Élevée \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Analyse du sprint}
+
+\insertimage{prism-uploads/Capture d'écran 2026-05-17 164007.png}{width=0.95\textwidth,height=9cm,keepaspectratio}{Diagramme de cas d'utilisation du Sprint 3 : Période de récolte}{fig:usecase-sprint3}
+
+Le service météo externe Open-Meteo intervient uniquement pour le cas d'utilisation lié à la récupération des données météorologiques. La recommandation prudente constitue une extension activée lorsque les données sont incomplètes, incohérentes ou lorsque l'image ne permet pas une interprétation fiable.
+
+\subsubsection*{Scénario : Estimer la période de récolte}
+
+\begin{enumerate}
+    \item L'utilisateur accède au module Période de récolte.
+    \item Il importe une image des olives.
+    \item Le système vérifie la qualité de l'image.
+    \item Le système estime le stade de maturité.
+    \item Le système récupère les données de la ferme et la météo.
+    \item Le système combine les données visuelles et contextuelles.
+    \item Une recommandation de récolte est affichée.
+\end{enumerate}
+
+\subsection{Conception du sprint}
+
+\insertimage{prism-uploads/Capture d'écran 2026-05-17 160816_2.png}{width=0.92\textwidth,height=13cm,keepaspectratio}{Diagramme d'activité du module Période de récolte}{fig:activity-recolte}
+
+Le diagramme d'activité suit le flux suivant : accès au module, importation de l'image, contrôle qualité, décision sur l'exploitabilité, analyse de maturité, récupération des données de ferme, récupération météo, fusion des données et génération d'une recommandation. Si l'image ou les données sont insuffisantes, le système retourne une recommandation prudente au lieu d'une conclusion trop catégorique.
+
+\insertimage{prism-uploads/Capture d'écran 2026-05-17 160655.png}{width=0.95\textwidth,height=13cm,keepaspectratio}{Diagramme de séquence du module Période de récolte}{fig:sequence-recolte}
+
+Le diagramme de séquence montre l'interaction entre l'agriculteur, l'interface web, le backend FastAPI, le service Période de récolte, la base SQLite et Open-Meteo. Cette séparation permet de combiner les informations locales de la ferme et les données climatiques externes.
+
+\subsection{Réalisation du sprint}
+
+Le module Période de récolte adopte une approche hybride. Il combine des indices visuels de maturité, la date, la saison, le cultivar et les données météorologiques afin de fournir une recommandation prudente.
+
+\insertimage{prism-uploads/Capture d'écran 2026-05-17 165855.png}{width=0.95\textwidth,height=7cm,keepaspectratio}{Interface du module Période de récolte}{fig:interface-recolte}
+
+Dans la version actuelle, ce module ne repose pas sur un modèle profond entraîné spécifiquement sur un grand jeu de données annoté de maturité des olives. Il s'agit d'une approche assistée par intelligence artificielle et règles agronomiques. Ce choix permet de produire une estimation lisible tout en restant prudent lorsque les données disponibles sont limitées.
+
+Le module utilise donc une logique hybride fondée sur l'image envoyée par l'utilisateur, le cultivar, la date, la saison, la localisation de la ferme, les données météorologiques issues d'Open-Meteo et des règles agronomiques prudentes. Si les données disponibles sont incomplètes ou contradictoires, le système évite de fournir une conclusion trop certaine.
+
+\insertimage{prism-uploads/Capture d'écran 2026-05-17 170337.png}{width=0.95\textwidth,height=7cm,keepaspectratio}{Résultat du module Période de récolte}{fig:resultat-recolte}
+
+La figure présente un exemple de résultat obtenu avec le module Période de récolte. Dans cet essai, la date de l'échantillon a été volontairement fixée dans une période compatible avec la récolte, afin de tester le comportement du module dans des conditions cohérentes avec le stade de maturité visible sur l'image.
+
+Le résultat fourni par l'application doit être interprété comme une aide à la décision et non comme une décision agronomique définitive. La décision finale doit aussi tenir compte du cultivar, de la région, des conditions climatiques, de l'état sanitaire des arbres et de l'objectif de production.
+
+\subsection{Résultat du sprint}
+
+À la fin de ce sprint, l'utilisateur peut estimer la période de récolte et obtenir une recommandation adaptée à partir des données disponibles. Le système prend en compte la qualité de l'image, la maturité visuelle, le contexte saisonnier, le cultivar et la météo.
+
+\section{Sprint 4 : Tableau de bord, Modèle de production et Assistant intelligent}
+
+\subsection{Objectif du sprint}
+
+Le quatrième lot fonctionnel vise à finaliser les modules de synthèse et d'aide à la décision. Il comprend le Tableau de bord, le Modèle de production, l'Historique, les alertes et l'Assistant intelligent.
+
+\subsection{Backlog du sprint}
+
+\begin{table}[H]
+\centering
+\caption{Backlog du Sprint 4}
+\label{tab:backlog-sprint4}
+\begin{tabular}{|p{1.4cm}|p{4.5cm}|p{6.6cm}|p{2cm}|}
+\hline
+\textbf{ID} & \textbf{Fonctionnalité} & \textbf{Histoire utilisateur} & \textbf{Priorité} \\
+\hline
+S4-01 & Tableau de bord & En tant qu'agriculteur, je veux consulter un tableau de bord pour suivre ma ferme. & Élevée \\
+\hline
+S4-02 & Historique & En tant qu'agriculteur, je veux consulter les anciennes analyses afin de suivre l'évolution. & Moyenne \\
+\hline
+S4-03 & Modèle de production & En tant qu'agriculteur, je veux obtenir une prévision de production. & Élevée \\
+\hline
+S4-04 & Assistant intelligent & En tant qu'agriculteur, je veux poser une question et obtenir une réponse utile. & Moyenne \\
+\hline
+S4-05 & Alertes & En tant qu'agriculteur, je veux recevoir des alertes et recommandations importantes. & Moyenne \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Analyse du sprint}
+
+\insertimage{prism-uploads/Capture d'écran 2026-05-17 220416.png}{width=0.95\textwidth,height=8cm,keepaspectratio}{Diagramme de cas d'utilisation du Sprint 4}{fig:usecase-sprint4}
+
+Ce diagramme regroupe les cas d'utilisation de synthèse : Consulter le Tableau de bord, Consulter l'Historique, Consulter les alertes et recommandations, Générer la prévision de production et Interagir avec l'Assistant intelligent. Le diagramme reste volontairement simplifié afin d'éviter une surcharge visuelle.
+
+\subsubsection*{Scénario : Consulter le tableau de bord}
+
+\begin{enumerate}
+    \item L'utilisateur accède à la page du Tableau de bord.
+    \item Le système récupère les informations de la ferme active.
+    \item Le système affiche les données météo, les résultats récents et les recommandations.
+    \item L'utilisateur consulte les alertes, la production estimée et l'Historique.
+\end{enumerate}
+
+\subsubsection*{Scénario : Générer la prévision de production}
+
+\begin{enumerate}
+    \item L'utilisateur accède au module de production.
+    \item Le système récupère les paramètres de la ferme.
+    \item Le système récupère l'historique disponible et les données météo.
+    \item Le système calcule les facteurs agronomiques.
+    \item Le système affiche une plage estimative et les indicateurs associés.
+\end{enumerate}
+
+\subsubsection*{Scénario : Utiliser l'Assistant intelligent}
+
+\begin{enumerate}
+    \item L'utilisateur ouvre la bulle de discussion.
+    \item Il saisit une question.
+    \item Le système analyse le contexte disponible.
+    \item Une réponse ou une orientation adaptée est proposée.
+\end{enumerate}
+
+\subsection{Conception du sprint}
+
+\insertimage{prism-uploads/Capture d'écran 2026-05-17 221635.png}{width=0.95\textwidth,height=8cm,keepaspectratio}{Diagramme de séquence de consultation du Tableau de bord}{fig:sequence-dashboard}
+
+Le Tableau de bord agrège les données de ferme, les derniers scans, l'Historique, les alertes, la météo et la production estimée. Il joue le rôle de point d'entrée décisionnel pour l'utilisateur.
+
+\insertimage{prism-uploads/Capture d'écran 2026-05-17 222638.png}{width=0.95\textwidth,height=8cm,keepaspectratio}{Diagramme de séquence du Modèle de production}{fig:sequence-production}
+
+Le Modèle de production récupère les paramètres de ferme, l'historique disponible et les données météo. Il applique ensuite des facteurs agronomiques pour retourner une plage estimative. Lorsque les données sont insuffisantes, le résultat doit rester prudent.
+
+\insertimage{prism-uploads/Capture d'écran 2026-05-17 224543.png}{width=0.95\textwidth,height=8cm,keepaspectratio}{Diagramme de séquence de l'Assistant intelligent}{fig:sequence-assistant}
+
+L'Assistant intelligent récupère le contexte disponible, analyse la question et retourne une réponse ou un message de fallback lorsque le contexte est insuffisant. Il ne constitue pas un modèle agronomique indépendant.
+
+\subsection{Réalisation du Tableau de bord}
+
+Le Tableau de bord centralise les informations essentielles de la ferme : météo, état sanitaire, maturité de récolte, production projetée, alertes et historique récent. Il permet à l'utilisateur d'avoir une vision synthétique de son exploitation.
+
+\insertimage{prism-uploads/Capture d'écran 2026-05-17 224715.png}{width=0.95\textwidth,height=7cm,keepaspectratio}{Interface du Tableau de bord}{fig:interface-dashboard}
+
+L'application intègre également un aperçu vivant du verger. Cette visualisation représente le contexte général de l'exploitation en fonction de la saison, de la météo, du moment de la journée et du stade de maturité. Elle a pour objectif de rendre les informations plus intuitives, sans prétendre constituer une simulation scientifique complète du verger.
+
+\insertimage{prism-uploads/Capture d'écran 2026-05-17 224945.png}{width=0.95\textwidth,height=7cm,keepaspectratio}{Aperçu vivant du verger}{fig:apercu-verger}
+
+\subsection{Justification du Modèle de production}
+
+Le module de production permet d'estimer la production future de l'exploitation. Il ne présente pas le résultat comme une valeur certaine, mais comme une prévision accompagnée d'un intervalle estimatif.
+
+\insertimage{prism-uploads/Capture d'écran 2026-05-17 225030.png}{width=0.95\textwidth,height=7cm,keepaspectratio}{Interface du Modèle de production}{fig:interface-production}
+
+Dans cette version, le Modèle de production doit être considéré comme un prototype heuristique. Il s'appuie sur des facteurs agronomiques simples afin de fournir une estimation lisible à l'utilisateur. Il ne s'agit pas d'un modèle agronomique scientifiquement validé sur un grand historique de données terrain.
+
+La formule générale utilisée dans cette version peut être exprimée comme suit :
+
+\begin{verbatim}
+Prevision = RendementBase * FacteurAge * R * T * C * I * D
+\end{verbatim}
+
+Avec :
+\begin{itemize}
+    \item \textbf{FacteurAge} : facteur lié à l'âge moyen des arbres ;
+    \item \textbf{R} : score de pluie ou disponibilité hydrique ;
+    \item \textbf{T} : score de stress thermique ;
+    \item \textbf{C} : score lié au cultivar ;
+    \item \textbf{I} : score lié au mode d'irrigation ;
+    \item \textbf{D} : score lié à la pression maladie.
+\end{itemize}
+
+Les coefficients utilisés doivent être calibrés avec des données historiques réelles issues d'exploitations oléicoles tunisiennes. Le résultat est donc une aide à la décision et non une garantie de rendement. Lorsque certaines informations sont absentes, le système utilise des hypothèses prudentes et réduit le niveau de confiance affiché.
+
+\subsection{Architecture de l'Assistant intelligent}
+
+L'Assistant intelligent est présenté sous forme d'une bulle de discussion. Il aide l'utilisateur à comprendre les résultats, à s'orienter dans l'application et à recevoir des conseils simples liés aux modules disponibles.
+
+\insertimage{prism-uploads/Capture d'écran 2026-05-17 225159.png}{width=0.95\textwidth,height=7cm,keepaspectratio}{Interface de l'Assistant intelligent}{fig:interface-assistant-sprint4}
+
+L'architecture de l'assistant suit un flux simple : l'utilisateur saisit une question, l'interface l'envoie au backend, le service récupère le contexte disponible lorsque cela est possible, puis une réponse est générée ou un message de fallback est affiché. Le contexte peut inclure le profil de ferme, les derniers résultats de Détection des maladies, les alertes, l'Historique et les recommandations récentes.
+
+\begin{table}[H]
+\centering
+\caption{Exemples d'utilisation de l'Assistant intelligent}
+\label{tab:exemples-assistant}
+\begin{tabular}{|p{6cm}|p{8cm}|}
+\hline
+\textbf{Question utilisateur} & \textbf{Réponse attendue} \\
+\hline
+Que signifie ce résultat de maladie ? & Expliquer le diagnostic, le niveau de confiance et recommander une vérification si nécessaire. \\
+\hline
+Quand dois-je récolter ? & Orienter vers le module Période de récolte ou résumer la dernière recommandation disponible. \\
+\hline
+Ma production estimée est-elle fiable ? & Expliquer que le résultat est une plage estimative dépendant des données disponibles. \\
+\hline
+Que faire si l'image est floue ? & Conseiller de reprendre une image nette, bien éclairée et centrée sur la partie végétale concernée. \\
+\hline
+\end{tabular}
+\end{table}
+
+Dans la version actuelle, l'Assistant intelligent agit comme une couche d'accompagnement et d'explication. Il ne remplace pas un expert agronome et ne doit pas inventer des recommandations lorsque le contexte est insuffisant.
+
+\section{Validation et limites de l'évaluation}
+
+Les tests réalisés ont porté sur les principales fonctionnalités de l'application : création du profil de ferme, analyse d'image, récupération météo, estimation de récolte, prévision de production, consultation du Tableau de bord et utilisation de l'Assistant intelligent.
+
+\begin{table}[H]
+\centering
+\caption{Tests fonctionnels réalisés}
+\label{tab:tests-fonctionnels}
+\begin{tabular}{|p{3.8cm}|p{5.6cm}|p{3.4cm}|}
+\hline
+\textbf{Module} & \textbf{Test réalisé} & \textbf{Résultat attendu} \\
+\hline
+Navigation & Ouvrir l'application et naviguer entre les pages & Pages accessibles sans erreur \\
+\hline
+Configuration de la ferme & Créer ou modifier une ferme & Données sauvegardées \\
+\hline
+Carte & Cliquer sur la carte pour placer le marqueur & Coordonnées mises à jour \\
+\hline
+Carte & Utiliser le bouton de position actuelle & Position récupérée ou message d'erreur clair \\
+\hline
+Configuration de la ferme & Rafraîchir après sauvegarde & Localisation conservée \\
+\hline
+Détection des maladies & Tester une feuille saine & Résultat sain ou absence de maladie visible \\
+\hline
+Détection des maladies & Tester une feuille malade supportée & Diagnostic affiché avec confiance suffisante \\
+\hline
+Détection des maladies & Tester une image floue ou non supportée & Message prudent ou résultat incertain \\
+\hline
+Période de récolte & Lancer l'analyse avec image et données de ferme & Recommandation affichée \\
+\hline
+Modèle de production & Lancer une prévision & Intervalle estimatif affiché \\
+\hline
+Tableau de bord & Vérifier ferme, météo, alertes, historique et production & Indicateurs affichés correctement \\
+\hline
+Assistant intelligent & Envoyer une question & Réponse ou message de fallback affiché \\
+\hline
+\end{tabular}
+\end{table}
+
+Cette validation reste essentiellement interne. Elle vérifie le bon fonctionnement logiciel, les cas limites et la cohérence de l'interface. En revanche, elle ne constitue pas une validation agronomique complète sur le terrain. Une évaluation future devrait inclure des agronomes, des agriculteurs et un questionnaire UX afin d'évaluer l'utilité, la clarté et la fiabilité perçue de l'application.
+
+\section{Résultats obtenus}
+
+À la fin de la deuxième version, l'application dispose des modules essentiels prévus dans le backlog produit :
+
+\begin{itemize}
+    \item une interface web moderne et structurée ;
+    \item un module de Configuration de la ferme ;
+    \item un module de Détection des maladies basé sur l'analyse d'images ;
+    \item un module Période de récolte ;
+    \item un Modèle de production heuristique ;
+    \item un Tableau de bord synthétique ;
+    \item un Historique des analyses ;
+    \item un Assistant intelligent d'accompagnement ;
+    \item une intégration des données météorologiques.
+\end{itemize}
+
+\section{Conclusion}
+
+Dans cette deuxième version, nous avons réalisé les modules liés à la Période de récolte, au Tableau de bord, au Modèle de production et à l'Assistant intelligent. L'application devient ainsi plus complète et propose un ensemble cohérent d'outils d'aide à la décision pour l'oléiculture, tout en conservant une approche prudente face aux limites des données et des modèles.
+
+% ==========================================================
+% CONCLUSION GENERALE
+% ==========================================================
+\chapter*{Conclusion générale et perspectives}
+\addcontentsline{toc}{chapter}{Conclusion générale et perspectives}
+
+Ce projet de fin d'études a permis de concevoir et de développer \textit{AgroVision Olive AI}, une plateforme web intelligente d'aide à la décision destinée à l'oléiculture tunisienne. L'objectif principal était de proposer une solution intégrée capable d'accompagner l'agriculteur dans le suivi de son exploitation, le diagnostic des maladies, l'estimation de la période de récolte, la prévision de production et l'interprétation des résultats.
+
+Nous avons commencé par l'étude du contexte général, la présentation de l'organisme d'accueil et l'analyse des solutions existantes. Cette étape a permis de constater que les outils disponibles sont souvent généralistes et ne répondent pas complètement aux besoins spécifiques de l'oléiculture tunisienne. À partir de cette analyse, nous avons proposé une solution centrée sur l'olivier et adaptée aux besoins pratiques des agriculteurs.
+
+La solution développée regroupe plusieurs modules complémentaires. Le module de Configuration de la ferme permet de saisir les informations de l'exploitation. Le module de Détection des maladies propose une aide au diagnostic à partir d'images, en s'appuyant sur un pipeline prudent combinant contrôle qualité, routage de partie végétale, modèle foliaire EfficientNet-B0 et règles expertes. Le module Période de récolte combine l'analyse visuelle, la météo, la saison et le cultivar pour proposer une recommandation. Le Modèle de production fournit une prévision sous forme d'intervalle. Le Tableau de bord centralise les informations principales, tandis que l'Assistant intelligent facilite l'interprétation des résultats.
+
+Ce travail a permis de mettre en pratique plusieurs compétences : développement frontend avec React, développement backend avec FastAPI, gestion de base de données SQLite, intégration de modèles de vision par ordinateur avec PyTorch, exploitation d'une API météo et conception d'une interface utilisateur moderne.
+
+Néanmoins, certaines limites subsistent. Les performances des modules intelligents dépendent fortement de la qualité et de la diversité des données disponibles. Le diagnostic des fruits et des branches reste conservateur. Le module Période de récolte pourrait être amélioré par la constitution d'un jeu de données annoté de maturité des olives. Le Modèle de production reste un prototype heuristique nécessitant une calibration agronomique sur des historiques réels. Enfin, une validation plus approfondie sur le terrain, avec des agronomes et des producteurs, serait nécessaire pour renforcer la fiabilité de la solution.
+
+Comme perspectives, nous proposons d'enrichir les jeux de données avec davantage d'images tunisiennes, d'améliorer les modèles de diagnostic, de développer un modèle profond dédié à la maturité des olives, de renforcer la prise en charge des fruits et des branches, d'ajouter une validation experte, de prévoir une application mobile, d'étudier un mode hors ligne adapté aux zones agricoles, d'intégrer des capteurs IoT, d'exploiter des images drone, d'étudier l'inférence embarquée avec l'edge AI, de migrer vers PostgreSQL et de préparer un déploiement cloud avec un tableau de bord expert.
+
+% ==========================================================
+% BIBLIOGRAPHIE
+% ==========================================================
+\chapter*{Bibliographie}
+\addcontentsline{toc}{chapter}{Bibliographie}
+
+\begin{enumerate}
+    \item Tan, M. et Le, Q., \textit{EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks}, Proceedings of the 36th International Conference on Machine Learning, 2019.
+    \item Mohanty, S. P., Hughes, D. P. et Salathé, M., \textit{Using Deep Learning for Image-Based Plant Disease Detection}, Frontiers in Plant Science, 2016.
+    \item Kamilaris, A. et Prenafeta-Boldú, F. X., \textit{Deep Learning in Agriculture: A Survey}, Computers and Electronics in Agriculture, 2018.
+    \item Royce, W. W., \textit{Managing the Development of Large Software Systems}, Proceedings of IEEE WESCON, 1970.
+    \item Pressman, R. S., \textit{Software Engineering: A Practitioner's Approach}, McGraw-Hill, 2014.
+\end{enumerate}
+
+% ==========================================================
+% WEBOGRAPHIE
+% ==========================================================
+\chapter*{Webographie}
+\addcontentsline{toc}{chapter}{Webographie}
+
+\begin{enumerate}
+    \item Institut de l'Olivier, \textit{Site officiel de l'Institut de l'Olivier}. Disponible sur : \url{http://www.io.agrinet.tn}, consulté le 22/05/2026.
+    \item Observatoire National de l'Agriculture, \textit{Portail ONAGRI}. Disponible sur : \url{https://www.onagri.nat.tn}, consulté le 22/05/2026.
+    \item Agridata Tunisie, \textit{Portail tunisien des données agricoles}. Disponible sur : \url{https://www.agridata.tn}, consulté le 22/05/2026.
+    \item Plantix, \textit{Plantix Agricultural App}. Disponible sur : \url{https://plantix.net}, consulté le 22/05/2026.
+    \item PlantVillage, \textit{PlantVillage Platform}. Disponible sur : \url{https://plantvillage.psu.edu}, consulté le 22/05/2026.
+    \item Agile Alliance, \textit{Manifeste Agile}. Disponible sur : \url{https://agilemanifesto.org}, consulté le 22/05/2026.
+    \item Scrum.org, \textit{The Scrum Guide}. Disponible sur : \url{https://scrumguides.org}, consulté le 22/05/2026.
+    \item FastAPI, \textit{FastAPI Documentation}. Disponible sur : \url{https://fastapi.tiangolo.com}, consulté le 22/05/2026.
+    \item Meta, \textit{React Documentation}. Disponible sur : \url{https://react.dev}, consulté le 22/05/2026.
+    \item Vite, \textit{Vite Documentation}. Disponible sur : \url{https://vitejs.dev}, consulté le 22/05/2026.
+    \item PyTorch Foundation, \textit{PyTorch Documentation}. Disponible sur : \url{https://pytorch.org}, consulté le 22/05/2026.
+    \item PyTorch Foundation, \textit{torchvision Documentation}. Disponible sur : \url{https://pytorch.org/vision/stable/index.html}, consulté le 22/05/2026.
+    \item SQLite Consortium, \textit{SQLite Documentation}. Disponible sur : \url{https://www.sqlite.org/docs.html}, consulté le 22/05/2026.
+    \item Open-Meteo, \textit{Open-Meteo API Documentation}. Disponible sur : \url{https://open-meteo.com}, consulté le 22/05/2026.
+    \item Leaflet, \textit{Leaflet Documentation}. Disponible sur : \url{https://leafletjs.com}, consulté le 22/05/2026.
+    \item Recharts, \textit{Recharts Documentation}. Disponible sur : \url{https://recharts.org}, consulté le 22/05/2026.
+    \item Framer, \textit{Framer Motion Documentation}. Disponible sur : \url{https://www.framer.com/motion}, consulté le 22/05/2026.
+\end{enumerate}
+
+\chapter*{Sources des images et figures}
+\addcontentsline{toc}{chapter}{Sources des images et figures}
+
+\begin{itemize}
+    \item Logo de l'Institut de l'Olivier : source institutionnelle, consultée le 22/05/2026.
+    \item Logos ou interfaces Plantix et PlantVillage : sites officiels des plateformes, consultés le 22/05/2026.
+    \item Captures d'écran de l'application AgroVision Olive AI : réalisées par l'auteur.
+    \item Diagrammes UML, diagrammes d'architecture, pipeline, Gantt et matrice de confusion : réalisés par l'auteur dans le cadre du projet.
+    \item Logos et références technologiques : documentations officielles des outils cités dans la Webographie.
+\end{itemize}
+
+% ==========================================================
+% ANNEXES
+% ==========================================================
+\appendix
+
+\chapter*{Annexe}
+\addcontentsline{toc}{chapter}{Annexe}
+\markboth{Annexe}{Annexe}
+
+\section*{Annexe A : Diagramme de classes global}
+\addcontentsline{toc}{section}{Annexe A : Diagramme de classes global}
+
+La figure suivante présente une vue simplifiée du diagramme de classes global de l'application AgroVision Olive AI. La classe \texttt{FarmProfile} représente l'entité centrale du système. Elle regroupe les informations principales de la ferme et se lie aux autres modules de la plateforme, notamment les groupes d'arbres, les scans de maladies, les estimations de récolte, les prévisions de production, les alertes et les messages de l'Assistant intelligent.
+
+\insertimage{prism-uploads/Capture d'écran 2026-05-17 234726.png}{width=0.95\textwidth,height=12cm,keepaspectratio}{Diagramme de classes global simplifié de l'application AgroVision Olive AI}{fig:class-global-agrovision}
+
+La structure globale peut être résumée par les classes suivantes : \texttt{User}, \texttt{FarmProfile}, \texttt{TreeGroup}, \texttt{DiseaseScan}, \texttt{HarvestEstimate}, \texttt{ProductionForecast}, \texttt{FarmAlert} et \texttt{AssistantMessage}. Les relations principales sont centrées sur \texttt{FarmProfile}, qui possède les groupes d'arbres, génère des analyses, reçoit des alertes et contextualise les réponses de l'assistant.
+
+\section*{Annexe B : Interfaces complémentaires}
+\addcontentsline{toc}{section}{Annexe B : Interfaces complémentaires}
+
+Cette annexe présente quelques interfaces complémentaires de l'application AgroVision Olive AI. Ces captures permettent de compléter les interfaces déjà présentées dans les chapitres de réalisation, notamment l'Historique des analyses, les alertes et recommandations ainsi que l'Assistant intelligent.
+
+\insertimage{prism-uploads/Capture d'écran 2026-05-17 234931.png}{width=0.95\textwidth,height=7cm,keepaspectratio}{Interface de consultation de l'Historique}{fig:interface-history}
+
+\insertimage{prism-uploads/Capture d'écran 2026-05-17 235007.png}{width=0.95\textwidth,height=7cm,keepaspectratio}{Interface des alertes et recommandations}{fig:interface-alerts}
+
+\insertimage{prism-uploads/Capture d'écran 2026-05-17 225159.png}{width=0.95\textwidth,height=7cm,keepaspectratio}{Interface de l'Assistant intelligent}{fig:interface-assistant-annexe}
+
+\section*{Annexe C : Commandes principales}
+\addcontentsline{toc}{section}{Annexe C : Commandes principales}
+
+\subsection*{Lancement du backend}
+
+\begin{verbatim}
+cd C:\Users\Win11\Downloads\pfe\agrovision-ai
+.\.venv312\Scripts\python.exe -m uvicorn backend.main:app --reload --host 127.0.0.1 --port 8000
+\end{verbatim}
+
+\subsection*{Lancement du frontend}
+
+\begin{verbatim}
+cd C:\Users\Win11\Downloads\pfe\agrovision-ai\frontend
+npm.cmd install
+npm.cmd run dev
+\end{verbatim}
+
+\subsection*{Réentraînement du modèle foliaire}
+
+\begin{verbatim}
+cd C:\Users\Win11\Downloads\pfe\agrovision-ai
+.\.venv312\Scripts\python.exe models\train_curated_disease_models.py --execute --epochs 12 --router-epochs 8 --batch-size 16
+\end{verbatim}
+
+\end{document}
